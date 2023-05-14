@@ -1,0 +1,12 @@
+theme:
+  name: material
+pages:
+  - Home: 'index.md'
+  - Spring: 
+    - 'spring1.md'
+    - 'spring2.md'
+  - MyBatis: 
+      - 'multithreading1.md'
+  - Java:
+  - Algo:
+    - 'algo-1405.md'
