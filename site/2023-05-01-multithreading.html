@@ -8,9 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://yiping-z.github.io/notes/multithreading1.html">
+        <link rel="canonical" href="https://yiping-z.github.io/notes/2023-05-01-multithreading.html">
       
       
+        <link rel="prev" href="2023-05-07-spring.html">
+      
+      
+        <link rel="next" href="2023-05-14-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day14.html">
       
       <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.12">
@@ -275,14 +279,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
       
       
       
@@ -291,7 +297,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Java多线程
@@ -302,11 +308,19 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="2023-05-01-multithreading.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="2023-05-01-multithreading.html" class="md-nav__link md-nav__link--active">
         并发编程 1, 2 (lianglianglee)
       </a>
+      
     </li>
   
 
@@ -540,7 +554,7 @@ public class ExtendsThread extends Thread {
 使用实现 Runnable 接口的方式，就可以把任务直接传入线程池，使用一些固定的线程来完成任务，不需要每次新建销毁线程，大大降低了性能开销
 3. Java 语言不支持双继承，如果我们的类一旦继承了 Thread 类，那么它后续就没有办法再继承其他的类，限制可拓展性</p>
 <p>用 interrupt停止线程：请求中断，而不是强制停止，因为这样可以避免数据错乱，也可以让线程有时间结束收尾工作。
-Thread.currentThread().isInterrupted()
+Thread.currentThread().isInterrupted()\
 如果 sleep、wait 等可以让线程进入阻塞的方法使线程休眠了，而处于休眠中的线程被中断，那么线程是可以感受到中断信号的，并且会抛出一个 InterruptedException 异常，同时清除中断信号，将中断标记位设置成 false。</p>
 <p>已经被舍弃的 stop()、suspend() 和 resume()，它们由于有很大的安全风险比如死锁风险而被舍弃，而 volatile 这种方法在某些特殊的情况下，比如线程被长时间阻塞的情况，就无法及时感受中断，所以 volatile 是不够全面的停止线程的方法。</p>
 

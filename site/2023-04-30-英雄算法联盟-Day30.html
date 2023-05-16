@@ -8,16 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://yiping-z.github.io/notes/multithreading1.html">
+        <link rel="canonical" href="https://yiping-z.github.io/notes/2023-04-30-%E8%8B%B1%E9%9B%84%E7%AE%97%E6%B3%95%E8%81%94%E7%9B%9F-Day30.html">
       
       
+        <link rel="prev" href="2023-04-29-%E8%8B%B1%E9%9B%84%E7%AE%97%E6%B3%95%E8%81%94%E7%9B%9F-Day29.html">
+      
+      
+        <link rel="next" href="2023-05-15-%E8%AE%AD%E7%BB%83%E8%90%A5-Day1.html">
       
       <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.12">
     
     
       
-        <title>并发编程 1, 2 (lianglianglee) - Yiping's Notes</title>
+        <title>2023 04 30 英雄算法联盟 Day30 - Yiping's Notes</title>
       
     
     
@@ -58,6 +62,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#31" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -89,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              并发编程 1, 2 (lianglianglee)
+              2023 04 30 英雄算法联盟 Day30
             
           </span>
         </div>
@@ -387,14 +396,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
       
       
       
@@ -403,7 +414,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
           英雄算法联盟
@@ -428,11 +439,55 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="2023-04-30-%E8%8B%B1%E9%9B%84%E7%AE%97%E6%B3%95%E8%81%94%E7%9B%9F-Day30.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          2023 04 30 英雄算法联盟 Day30
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="2023-04-30-%E8%8B%B1%E9%9B%84%E7%AE%97%E6%B3%95%E8%81%94%E7%9B%9F-Day30.html" class="md-nav__link md-nav__link--active">
         2023 04 30 英雄算法联盟 Day30
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    31. 状态压缩
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30" class="md-nav__link">
+    30: 拓扑排序
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -511,6 +566,28 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    31. 状态压缩
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30" class="md-nav__link">
+    30: 拓扑排序
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -527,22 +604,95 @@
   
 
 
-  <h1>并发编程 1, 2 (lianglianglee)</h1>
+  <h1>2023 04 30 英雄算法联盟 Day30</h1>
 
-<p>创建线程方法</p>
-<pre><code class="language-java">public class RunnableThread implements Runnable {
-public class ExtendsThread extends Thread {
+<h2 id="31">31. 状态压缩</h2>
+<p><a href="https://leetcode.cn/problems/beautiful-arrangement/">526. Beautiful Arrangement</a></p>
+<p>题目描述：n integers from 1 to n, permutate, either: perm[i] % i == 0 or i % perm[i] == 0</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int countArrangement(int n) {
+        vector&lt;int&gt; f(1 &lt;&lt; n);
+        f[0] = 1;
+        // 遍历所有可能情况
+        for (int mask = 1; mask &lt; (1 &lt;&lt; n); mask++) {
+            //被选中的个数
+            int num = __builtin_popcount(mask);
+            for (int i = 0; i &lt; n; i++) {
+                //第i + 1位数被选中 &amp;&amp; 可以被放到最高位上
+                if (mask &amp; (1 &lt;&lt; i) &amp;&amp; (num % (i + 1) == 0 || (i + 1) % num == 0)) {
+                    // 加上剩余n-1个数的可能排序方式的个数
+                    f[mask] += f[mask ^ (1 &lt;&lt; i)];
+                }
+            }
+        }
+        return f[(1 &lt;&lt; n) - 1];
+    }
+};
 </code></pre>
-<p>Callable, 线程池</p>
-<p>实现 Runnable 接口比继承 Thread 类实现线程要好
-1. 实现了 Runnable 与 Thread 类的解耦，Runnable 里只有一个 run() 方法，它定义了需要执行的内容，Thread 类负责线程启动和属性设置等内容。
-2. 使用继承 Thread 类方式，每次执行一次任务，都需要新建一个独立的线程，执行完任务后线程走到生命周期的尽头被销毁，如果还想执行这个任务，就必须再新建一个继承了 Thread 类的类。
-使用实现 Runnable 接口的方式，就可以把任务直接传入线程池，使用一些固定的线程来完成任务，不需要每次新建销毁线程，大大降低了性能开销
-3. Java 语言不支持双继承，如果我们的类一旦继承了 Thread 类，那么它后续就没有办法再继承其他的类，限制可拓展性</p>
-<p>用 interrupt停止线程：请求中断，而不是强制停止，因为这样可以避免数据错乱，也可以让线程有时间结束收尾工作。
-Thread.currentThread().isInterrupted()
-如果 sleep、wait 等可以让线程进入阻塞的方法使线程休眠了，而处于休眠中的线程被中断，那么线程是可以感受到中断信号的，并且会抛出一个 InterruptedException 异常，同时清除中断信号，将中断标记位设置成 false。</p>
-<p>已经被舍弃的 stop()、suspend() 和 resume()，它们由于有很大的安全风险比如死锁风险而被舍弃，而 volatile 这种方法在某些特殊的情况下，比如线程被长时间阻塞的情况，就无法及时感受中断，所以 volatile 是不够全面的停止线程的方法。</p>
+<p><a href="https://leetcode.cn/problems/maximum-score-words-formed-by-letters/">1255. Maximum Score Words Formed by Letters</a></p>
+<p>题目描述：Given list of words, and list of single letters and score of every character, return maximum score of any valid set of words formed by the letters given. Each letter can only be used once.</p>
+<p>思路：统计提供的字母次数
+遍历所有可能情况，for (int s = 1; s &lt; (1 &lt;&lt; n); s++) {
+统计子集中所有字母出现的次数
+如果次数都没有超过提供的次数，将当前和与最大和比较，更新最大和</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int maxScoreWords(vector&lt;string&gt;&amp; words, vector&lt;char&gt;&amp; letters, vector&lt;int&gt;&amp; score) {
+        int n = words.size(), res = 0;
+        vector&lt;int&gt; count(26);
+        for (auto c : letters) {
+            count[c - 'a']++;
+        }
+        for (int s = 1; s &lt; (1 &lt;&lt; n); s++) {
+            vector&lt;int&gt; wordCount(26); // 统计子集 s 所有单词的字母数目
+            for (int k = 0; k &lt; n; k++) {
+                if ((s &amp; (1 &lt;&lt; k)) == 0) { // words[k] 不在子集 s 中
+                    continue;
+                }
+                for (auto c : words[k]) {
+                    wordCount[c - 'a']++;
+                }
+            }
+            bool ok = true; // 判断子集 s 是否合法
+            int sum = 0; // 保存子集 s 的得分
+            for (int i = 0; i &lt; 26; i++) {
+                sum += score[i] * wordCount[i];
+                ok = ok &amp;&amp; (wordCount[i] &lt;= count[i]);
+            }
+            if (ok) {
+                res = max(res, sum);
+            }
+        }
+        return res;
+    }
+};
+</code></pre>
+<h2 id="30">30: 拓扑排序</h2>
+<p><a href="https://leetcode.cn/problems/number-of-ways-to-arrive-at-destination/">1976. Number of Ways to Arrive at Destination</a></p>
+<p>题目描述：Given integer n, and 2D array roads where roads[i] = [u<sub>i</sub>, v<sub>i</sub>, time<sub>i</sub>], meaning there is a road between u<sub>i</sub>, and v<sub>i</sub>, that takes time<sub>i</sub> to travel, return the number of ways can travel from 0 to n - 1 in the sortest amount of time, return ans % (10<sup>9</sup> + 1)</p>
+<p>思路：
+性质：在任意的合法方案中，途径的该路径中的每个点时，都是以最短路径的方式到达的
+在跑「拓扑排序」过程中进行 DP，统计方案数</p>
+<pre><code class="language-cpp">//dijkstra
+while (!pq.empty()) {
+    auto [_, u] = pq.top();
+    pq.pop();
+    if (vis[u]) {
+        continue;
+    }
+    vis[u] = 1;
+    for (auto [v, w]: G[u]) {
+        if (dist[v] &gt; dist[u] + w) {
+            dist[v] = dist[u] + w;
+            f[v] = f[u];
+            pq.push({dist[v], v});
+        } else if (dist[v] == dist[u] + w) {
+            f[v] = (f[u] + f[v]) % (long)(1e9 + 7);
+        }
+    }
+}
+</code></pre>
 
 
 

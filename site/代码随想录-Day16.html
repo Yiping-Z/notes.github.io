@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://yiping-z.github.io/notes/multithreading1.html">
+        <link rel="canonical" href="https://yiping-z.github.io/notes/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day16.html">
       
       
       
@@ -17,7 +17,7 @@
     
     
       
-        <title>并发编程 1, 2 (lianglianglee) - Yiping's Notes</title>
+        <title>代码随想录 Day 14 - Yiping's Notes</title>
       
     
     
@@ -89,7 +89,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              并发编程 1, 2 (lianglianglee)
+              代码随想录 Day 14
             
           </span>
         </div>
@@ -527,22 +527,121 @@
   
 
 
-  <h1>并发编程 1, 2 (lianglianglee)</h1>
+  <h1>代码随想录 Day 14</h1>
 
-<p>创建线程方法</p>
-<pre><code class="language-java">public class RunnableThread implements Runnable {
-public class ExtendsThread extends Thread {
+<p><a href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">104. Maximum Depth of Binary Tree</a>
+前序求的是深度，后序求的是高度。
+二叉树节点的深度：指从根节点到该节点的最长简单路径边的条数或者节点数（取决于深度从0开始还是从1开始）
+二叉树节点的高度：指从该节点到叶子节点的最长简单路径边的条数后者节点数（取决于高度从0开始还是从1开始）</p>
+<pre><code class="language-cpp">class solution {
+public:
+    int getdepth(treenode* node) {
+        if (node == NULL) return 0;
+        int leftdepth = getdepth(node-&gt;left);       // 左
+        int rightdepth = getdepth(node-&gt;right);     // 右
+        int depth = 1 + max(leftdepth, rightdepth); // 中
+        return depth;
+    }
+    int maxdepth(treenode* root) {
+        return getdepth(root);
+    }
+};
 </code></pre>
-<p>Callable, 线程池</p>
-<p>实现 Runnable 接口比继承 Thread 类实现线程要好
-1. 实现了 Runnable 与 Thread 类的解耦，Runnable 里只有一个 run() 方法，它定义了需要执行的内容，Thread 类负责线程启动和属性设置等内容。
-2. 使用继承 Thread 类方式，每次执行一次任务，都需要新建一个独立的线程，执行完任务后线程走到生命周期的尽头被销毁，如果还想执行这个任务，就必须再新建一个继承了 Thread 类的类。
-使用实现 Runnable 接口的方式，就可以把任务直接传入线程池，使用一些固定的线程来完成任务，不需要每次新建销毁线程，大大降低了性能开销
-3. Java 语言不支持双继承，如果我们的类一旦继承了 Thread 类，那么它后续就没有办法再继承其他的类，限制可拓展性</p>
-<p>用 interrupt停止线程：请求中断，而不是强制停止，因为这样可以避免数据错乱，也可以让线程有时间结束收尾工作。
-Thread.currentThread().isInterrupted()
-如果 sleep、wait 等可以让线程进入阻塞的方法使线程休眠了，而处于休眠中的线程被中断，那么线程是可以感受到中断信号的，并且会抛出一个 InterruptedException 异常，同时清除中断信号，将中断标记位设置成 false。</p>
-<p>已经被舍弃的 stop()、suspend() 和 resume()，它们由于有很大的安全风险比如死锁风险而被舍弃，而 volatile 这种方法在某些特殊的情况下，比如线程被长时间阻塞的情况，就无法及时感受中断，所以 volatile 是不够全面的停止线程的方法。</p>
+<pre><code class="language-cpp">class solution {
+public:
+    int result;
+    void getdepth(treenode* node, int depth) {
+        result = depth &gt; result ? depth : result; // 中
+        if (node-&gt;left == NULL &amp;&amp; node-&gt;right == NULL) return ;
+        if (node-&gt;left) { // 左
+            getdepth(node-&gt;left, depth + 1);
+        }
+        if (node-&gt;right) { // 右
+            getdepth(node-&gt;right, depth + 1);
+        }
+        return ;
+    }
+    int maxdepth(treenode* root) {
+        result = 0;
+        if (root == 0) return result;
+        getdepth(root, 1);
+        return result;
+    }
+};
+</code></pre>
+<p><a href="https://leetcode.cn/problems/minimum-depth-of-binary-tree/">105.Minimum Depth of Binary Tree</a></p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int minDepth(TreeNode* root) {
+        if (root == NULL) return 0;
+        if (root-&gt;left == NULL &amp;&amp; root-&gt;right != NULL) {
+            return 1 + minDepth(root-&gt;right);
+        }
+        if (root-&gt;left != NULL &amp;&amp; root-&gt;right == NULL) {
+            return 1 + minDepth(root-&gt;left);
+        }
+        return 1 + min(minDepth(root-&gt;left), minDepth(root-&gt;right));
+    }
+};
+</code></pre>
+<pre><code class="language-cpp">class Solution {
+private:
+    int result;
+    void getdepth(TreeNode* node, int depth) {
+        if (node-&gt;left == NULL &amp;&amp; node-&gt;right == NULL) {
+            result = min(depth, result);  
+            return;
+        }
+        // 中 只不过中没有处理的逻辑
+        if (node-&gt;left) { // 左
+            getdepth(node-&gt;left, depth + 1);
+        }
+        if (node-&gt;right) { // 右
+            getdepth(node-&gt;right, depth + 1);
+        }
+        return ;
+    }
+
+public:
+    int minDepth(TreeNode* root) {
+        if (root == NULL) return 0;
+        result = INT_MAX;
+        getdepth(root, 1);
+        return result;
+    }
+};
+</code></pre>
+<p><a href="https://leetcode.cn/problems/count-complete-tree-nodes/">222. Count Complete Tree Nodes</a></p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int countNodes(TreeNode* root) {
+        if (root == NULL) return 0;
+        return 1 + countNodes(root-&gt;left) + countNodes(root-&gt;right);
+    }
+};
+</code></pre>
+<pre><code class="language-cpp">class Solution {
+public:
+    int countNodes(TreeNode* root) {
+        if (root == nullptr) return 0;
+        TreeNode* left = root-&gt;left;
+        TreeNode* right = root-&gt;right;
+        int leftDepth = 0, rightDepth = 0; // 这里初始为0是有目的的，为了下面求指数方便
+        while (left) {  // 求左子树深度
+            left = left-&gt;left;
+            leftDepth++;
+        }
+        while (right) { // 求右子树深度
+            right = right-&gt;right;
+            rightDepth++;
+        }
+        if (leftDepth == rightDepth) {
+            return (2 &lt;&lt; leftDepth) - 1; // 注意(2&lt;&lt;1) 相当于2^2，所以leftDepth初始为0
+        }
+        return countNodes(root-&gt;left) + countNodes(root-&gt;right) + 1;
+    }
+};
+</code></pre>
 
 
 
