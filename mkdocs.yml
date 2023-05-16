@@ -12,18 +12,21 @@ nav:
   - Home: index.md
   - 框架:
     - Spring: 
-      - 2023-05-01-spring.md
       - 2023-05-07-spring.md
+      - 2023-05-01-spring.md
+
   - 语言:
     - Java多线程: 
       - 2023-05-01-multithreading.md
   - 算法: 
     - 代码随想录:
-      - 2023-05-14-代码随想录-Day14.md
       - 2023-05-15-代码随想录-Day15.md
+      - 2023-05-14-代码随想录-Day14.md
+
     - 英雄算法联盟:
-      - 2023-04-29-英雄算法联盟-Day29.md
       - 2023-04-30-英雄算法联盟-Day30.md
+      - 2023-04-29-英雄算法联盟-Day29.md
+
     - 训练营:
       - 2023-05-15-训练营-Day1.md
 site_name: Yiping's Notes
