@@ -1,12 +1,21 @@
 theme:
   name: material
-pages:
-  - Home: 'index.md'
+nav:
+  - Home: index.md
   - Spring: 
-    - 'spring1.md'
-    - 'spring2.md'
+    - spring1.md
+    - spring2.md
   - MyBatis: 
-      - 'multithreading1.md'
-  - Java:
-  - Algo:
-    - 'algo-1405.md'
+      - multithreading1.md
+  - 代码随想录:
+    - algo-1405.md
+site_name: Yiping's Notes
+repo_url: https://github.com/Yiping-Z/notes
+site_url: https://yiping-z.github.io/notes/
+copyright: Copyright @ Yiping-Z
+remote_branch: gh-pages
+use_directory_urls: false
+extra:
+  social:
+    - icon: octicons/mark-github-16
+      link: https://yiping-z.github.io/
