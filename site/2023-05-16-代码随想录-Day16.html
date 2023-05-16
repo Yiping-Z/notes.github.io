@@ -754,9 +754,11 @@
   <h1>2023 05 16 代码随想录 Day16</h1>
 
 <p><a href="https://leetcode.cn/problems/find-bottom-left-tree-value/">513. Find Bottom Left Tree Value</a></p>
-<p>思路：
-- 递归: 用中序遍历确保左节点最先visit，再记录最大深度
-- BFS</p>
+<p>思路：</p>
+<ul>
+<li>递归: 用中序遍历确保左节点最先visit，再记录最大深度</li>
+<li>BFS</li>
+</ul>
 <pre><code class="language-cpp">// 递归
 class Solution {
 public:
@@ -784,10 +786,60 @@ public:
 </code></pre>
 <p><a href="https://leetcode.cn/problems/path-sum/">112. Path Sum</a></p>
 <ul>
-<li>如果需要搜索整棵二叉树且不用处理递归返回值，递归函数就不要返回值。（这种情况就是本文下半部分介绍的113.路径总和ii）</li>
-<li>如果需要搜索整棵二叉树且需要处理递归返回值，递归函数就需要返回值。 （这种情况我们在236. 二叉树的最近公共祖先 (opens new window)中介绍）</li>
+<li>如果需要搜索整棵二叉树且不用处理递归返回值，递归函数就不要返回值。（113.路径总和ii）</li>
+<li>如果需要搜索整棵二叉树且需要处理递归返回值，递归函数就需要返回值。 （236. 二叉树的最近公共祖先中介绍）</li>
 <li>如果要搜索其中一条符合条件的路径，那么递归一定需要返回值，因为遇到符合条件的路径了就要及时返回。</li>
 </ul>
+<p><a href="https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">106. Construct Binary Tree from Inorder and Postorder Traversal</a></p>
+<pre><code class="language-cpp">class Solution {
+public:
+    TreeNode* helper(int postend, int instart, int inend, vector&lt;int&gt;&amp;in, vector&lt;int&gt;&amp;post) {
+        if (postend &lt; 0 || instart &gt; inend) {
+            return NULL;
+        }
+        TreeNode* root = new TreeNode(post[postend]);
+        int idx = 0;
+        for (int i = instart; i &lt;= inend; i++) {
+            if (in[i] == post[postend]) {
+                idx = i;
+                break;
+            }
+        }
+        root-&gt;left = helper(postend - (inend - idx + 1), instart, idx - 1, in, post);
+        root-&gt;right = helper(postend - 1, idx + 1, inend, in, post);
+        return root;
+    }
+
+    TreeNode* buildTree(vector&lt;int&gt;&amp; inorder, vector&lt;int&gt;&amp; postorder) {
+        return helper(postorder.size() - 1, 0, inorder.size() - 1, inorder, postorder);
+    }
+};
+</code></pre>
+<p><a href="https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">105. Construct Binary Tree from Preorder and Inorder Traversal</a></p>
+<pre><code class="language-cpp">class Solution {
+public:
+    TreeNode* helper(int prestart, int instart, int inend, vector&lt;int&gt;&amp;pre, vector&lt;int&gt;&amp;in) {
+        if (prestart &gt;= pre.size() || instart &gt; inend) {
+            return NULL;
+        }
+        TreeNode* root = new TreeNode(pre[prestart]);
+        int idx = 0;
+        for (int i = instart; i &lt;= inend; i++) {
+            if (in[i] == pre[prestart]) {
+                idx = i;
+                break;
+            }
+        }
+        root-&gt;left = helper(prestart + 1, instart, idx - 1, pre, in);
+        root-&gt;right = helper(prestart + idx - instart + 1, idx + 1, inend, pre, in);
+        return root;
+    }
+    TreeNode* buildTree(vector&lt;int&gt;&amp; preorder, vector&lt;int&gt;&amp; inorder) {
+        return helper(0, 0, inorder.size() - 1, preorder, inorder);
+    }
+};
+</code></pre>
+<p>前序和后序不能唯一确定一棵二叉树，因为没有中序遍历无法确定左右部分，无法分割。</p>
 
 
 
