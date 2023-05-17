@@ -859,15 +859,15 @@
 <h2 id="29">29: 分而治之</h2>
 <p><a href="https://leetcode.cn/problems/NUPfPr/">剑指 Offer II 101. 分割等和子集</a></p>
 <pre><code class="language-cpp">dp[nums.size() - 1][target]
-      for (int i = 1; i &lt; nums.size(); i++) {
-            for (int j = 1; j &lt;= sum; j++) {
-                if (j - nums[i] &gt;= 0) {
-                    dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i]]; 
-                } else {
-                    dp[i][j] = dp[i - 1][j];
-                }
-            }
+for (int i = 1; i &lt; nums.size(); i++) {
+    for (int j = 1; j &lt;= sum; j++) {
+        if (j - nums[i] &gt;= 0) {
+            dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i]]; 
+        } else {
+            dp[i][j] = dp[i - 1][j];
         }
+    }
+}
 </code></pre>
 <h2 id="31">31: 状态压缩模版</h2>
 <pre><code class="language-cpp">const int maxn = 12;
