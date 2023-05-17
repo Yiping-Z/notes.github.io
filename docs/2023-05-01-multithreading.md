@@ -3,7 +3,10 @@ layout: notes
 title: 并发编程 1, 2 (lianglianglee)
 description: 
 image: 
+hide:
+  - toc
 ---
+
 创建线程方法
 ```java
 public class RunnableThread implements Runnable {
