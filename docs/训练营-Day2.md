@@ -1,0 +1,56 @@
+---
+hide:
+  - toc
+title: Day 2
+---
+[704. 二分查找](https://leetcode.cn/problems/binary-search/)
+
+题目：给你一个升序数组nums和一个目标值target，返回目标值target在数组nums中的下标，如果不存在则返回-1
+
+思路：二分查找
+```cpp
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int l = 0;
+        int r = nums.size(
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            if (nums[mid] < target) {
+                l = mid + 1;
+            } else if (nums[mid] > target) {
+                r = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        return -1;
+    }
+};
+```
+
+[27. 移除元素](https://leetcode.cn/problems/remove-element/)
+
+题目：给你一个数组nums和一个值val，要求你把数组中值为val的元素全部删掉，而且不允许你使用额外的数组来辅助解决这题，返回移除val后数组的长度
+
+思路：快慢指针，快指针遍历数组，慢指针遍历当前不重复的下标。不重复的数一定小于等于原数组，所以不会写到快指针
+还没有遍历的数
+
+```cpp
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int i = 0;
+        int curr = 0;
+        int cnt = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] != val) {
+                nums[curr] = nums[i];
+                curr++;
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
+```
