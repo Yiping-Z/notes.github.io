@@ -3,7 +3,7 @@ hide:
   - toc
 title: Day 3
 ---
-[移除链表元素](https://leetcode.cn/problems/remove-linked-list-elements/submissions/)
+[203. 移除链表元素](https://leetcode.cn/problems/remove-linked-list-elements/)
 
 题目： 给你一个链表和一个val，删除所有节点值等于val的节点，返回链表
 
@@ -29,7 +29,7 @@ public:
     }
 };
 ```
-题目：[设计链表](https://leetcode.cn/problems/design-linked-list/)
+[707. 设计链表](https://leetcode.cn/problems/design-linked-list/)
 ```cpp
 class MyLinkedList {
 public:
@@ -105,7 +105,7 @@ public:
 };
 ```
 
-[反转链表](https://leetcode.cn/problems/reverse-linked-list/)
+[206. 反转链表](https://leetcode.cn/problems/reverse-linked-list/)
 
 题目： 给你一个链表，翻转一下，返回头节点
 ```cpp
