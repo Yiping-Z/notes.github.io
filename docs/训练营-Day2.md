@@ -3,54 +3,95 @@ hide:
   - toc
 title: Day 2
 ---
-[704. 二分查找](https://leetcode.cn/problems/binary-search/)
+[977.有序数组的平方](https://leetcode.cn/problems/squares-of-a-sorted-array/)
 
-题目：给你一个升序数组nums和一个目标值target，返回目标值target在数组nums中的下标，如果不存在则返回-1
+题目： 给你一个递增数组nums（包含负数），返回一个数组，且数组要求里面的元素是给定数组nums里面元素的平方，还要求递增
 
-思路：二分查找
 ```cpp
 class Solution {
 public:
-    int search(vector<int>& nums, int target) {
+    vector<int> sortedSquares(vector<int>& nums) {
+        vector<int>res(nums.size());
         int l = 0;
-        int r = nums.size(
+        int r = nums.size() - 1;
+        int idx = r;
         while (l <= r) {
-            int mid = l + (r - l) / 2;
-            if (nums[mid] < target) {
-                l = mid + 1;
-            } else if (nums[mid] > target) {
-                r = mid - 1;
+            // 每次比较两端的值，因为最大值只会在两端出现
+            if (abs(nums[l]) > abs(nums[r])) {
+                // 放进结果数组的末尾
+                res[idx] = (nums[l] * nums[l]);
+                l++;
             } else {
-                return mid;
+                res[idx] = (nums[r] * nums[r]);
+                r--;
             }
+            idx--;
         }
-        return -1;
+        return res;
     }
 };
 ```
 
-[27. 移除元素](https://leetcode.cn/problems/remove-element/)
+[209.长度最小的子数组](https://leetcode.cn/problems/minimum-size-subarray-sum/submissions/)
 
-题目：给你一个数组nums和一个值val，要求你把数组中值为val的元素全部删掉，而且不允许你使用额外的数组来辅助解决这题，返回移除val后数组的长度
+题目：给你一个数组和target，求出一个连续子数组，并且这个子数组相加要大于target，返回子数组最短的长度
 
-思路：快慢指针，快指针遍历数组，慢指针遍历当前不重复的下标。不重复的数一定小于等于原数组，所以不会写到快指针
-还没有遍历的数
+思路：滑动窗口
 
 ```cpp
 class Solution {
 public:
-    int removeElement(vector<int>& nums, int val) {
-        int i = 0;
-        int curr = 0;
-        int cnt = 0;
-        for (int i = 0; i < nums.size(); i++) {
-            if (nums[i] != val) {
-                nums[curr] = nums[i];
-                curr++;
-                cnt++;
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int res = INT_MAX;
+        int l = 0;
+        int r = 0;
+        int sum = 0;
+        while (r < nums.size()) {
+            sum += nums[r];
+            r++;
+            while (sum - nums[l] >= target) {
+                sum -= nums[l];
+                l++;
+            }
+            if (sum >= target) {
+                res = min(res, r - l);
             }
         }
-        return cnt;
+        return res == INT_MAX ? 0 : res;
+    }
+};
+```
+
+[59. 螺旋矩阵II](https://leetcode.cn/problems/spiral-matrix-ii/)
+
+题目： 给你一个n，生成NxN的矩阵，并且要求你顺时针填入1，2，3，4，5...
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>>dir = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        vector<vector<int>>res(n, vector<int>(n));
+        vector<vector<bool>>visited(n, vector<bool>(n, false));
+        int num = 1;
+        int x = 0;
+        int y = 0;
+        int idx = 0;
+        while (num <= n * n) {
+            res[x][y] = num;
+            visited[x][y] = true;
+            int xi = x + dir[idx][0];
+            int yi = y + dir[idx][1];
+            if (!(xi >= 0 && xi < n && yi >= 0 && yi < n) || visited[xi][yi]) {
+                idx =  (idx + 1) % 4;
+                xi = x + dir[idx][0];
+                yi = y + dir[idx][1];
+            }
+            x = xi;
+            y = yi;
+            num++;
+        }
+        return res;
     }
 };
 ```
