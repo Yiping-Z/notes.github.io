@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://yiping-z.github.io/notes/2023-05-16-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day16.html">
+        <link rel="canonical" href="https://yiping-z.github.io/notes/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day19.html">
       
       
-        <link rel="prev" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day17.html">
+        <link rel="prev" href="2023-05-01-multithreading.html">
       
       
-        <link rel="next" href="2023-05-15-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day15.html">
+        <link rel="next" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day18.html">
       
       <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
     
     
       
-        <title>Day 16 二叉树 - Yiping's Notes</title>
+        <title>Day 19 二叉搜索树 - Yiping's Notes</title>
       
     
     
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Day 16 二叉树
+              Day 19 二叉搜索树
             
           </span>
         </div>
@@ -586,11 +586,19 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day19.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day19.html" class="md-nav__link md-nav__link--active">
         Day 19 二叉搜索树
       </a>
+      
     </li>
   
 
@@ -628,19 +636,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="2023-05-16-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day16.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="2023-05-16-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day16.html" class="md-nav__link">
         Day 16 二叉树
       </a>
-      
     </li>
   
 
@@ -861,95 +861,129 @@
   
 
 
-  <h1>Day 16 二叉树</h1>
+  <h1>Day 19 二叉搜索树</h1>
 
-<p><a href="https://leetcode.cn/problems/find-bottom-left-tree-value/">513. Find Bottom Left Tree Value</a></p>
-<p>思路：</p>
-<ul>
-<li>递归: 用中序遍历确保左节点最先visit，再记录最大深度</li>
-<li>BFS</li>
-</ul>
-<pre><code class="language-cpp">// 递归
+<p>完全二叉树一定是平衡二叉树，堆的排序是父节点大于子节点，<br>
+而搜索树是父节点大于左孩子，小于右孩子，所以堆不是平衡二叉搜索树</p>
+<p><a href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/">235. Lowest Common Ancestor of a Binary Search Tree</a></p>
+<p>思路：<br>
+二叉树：如果node本身是自己的ancestor，那么只有left/right一边有值，另一边为空值，必须搜索整个二叉树<br>
+二叉搜索树：从上向下去递归遍历，第一次遇到 cur节点是数值在[p, q]区间中，那么cur就是p和q的最近公共祖先。不需要遍历整个树。</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if (root-&gt;val &gt; p-&gt;val &amp;&amp; root-&gt;val &gt; q-&gt;val) {
+            return lowestCommonAncestor(root-&gt;left, p, q);
+        } else if (root-&gt;val &lt; p-&gt;val &amp;&amp; root-&gt;val &lt; q-&gt;val) {
+            return lowestCommonAncestor(root-&gt;right, p, q);
+        }
+        return root;
+    }
+};
+
+// 迭代
 class Solution {
 public:
-    int depth = INT_MIN;
-    int res = 0;
-    void traverse(TreeNode* root, int d) {
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        while(root) {
+            if (root-&gt;val &gt; p-&gt;val &amp;&amp; root-&gt;val &gt; q-&gt;val) {
+                root = root-&gt;left;
+            } else if (root-&gt;val &lt; p-&gt;val &amp;&amp; root-&gt;val &lt; q-&gt;val) {
+                root = root-&gt;right;
+            } else return root;
+        }
+        return NULL;
+    }
+};
+</code></pre>
+<p><a href="https://leetcode.cn/problems/insert-into-a-binary-search-tree/">701. Insert into a Binary Search Tree</a></p>
+<pre><code class="language-cpp">class Solution {
+public:
+    TreeNode* insertIntoBST(TreeNode* root, int val) {
         if (!root) {
-            return;
+            // 下一层将加入节点返回，本层用root-&gt;left或者root-&gt;right将其接住
+            return new TreeNode(val);
+        } else if (root-&gt;val &lt; val) {
+            root-&gt;right = insertIntoBST(root-&gt;right, val);
+        } else if (root-&gt;val &gt; val) {
+            root-&gt;left = insertIntoBST(root-&gt;left, val);
         }
-        traverse(root-&gt;left, d + 1);
-        if (!root-&gt;left &amp;&amp; !root-&gt;right) {
-            if (d &gt; depth) {
-                res = root-&gt;val;
-                depth = d;
-            }
-            return;
-        }
-        traverse(root-&gt;right, d + 1);
-    }
-    int findBottomLeftValue(TreeNode* root) {
-        traverse(root, 0);
-        return res;
+        return root;
     }
 };
 </code></pre>
-<p><a href="https://leetcode.cn/problems/path-sum/">112. Path Sum</a></p>
+<p><a href="https://leetcode.cn/problems/delete-node-in-a-bst/">450. Delete Node in a BST</a></p>
 <ul>
-<li>如果需要搜索整棵二叉树且不用处理递归返回值，递归函数就不要返回值。（<a href="https://leetcode.cn/problems/path-sum-ii/">113.路径总和ii</a>）</li>
-<li>如果需要搜索整棵二叉树且需要处理递归返回值，递归函数就需要返回值。 （<a href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/">236. 二叉树的最近公共祖先</a>中介绍）</li>
-<li>如果要搜索其中一条符合条件的路径，那么递归一定需要返回值，因为遇到符合条件的路径了就要及时返回。</li>
+<li>没找到删除的节点，遍历到空节点直接返回了</li>
+<li>找到删除的节点<ul>
+<li>左右孩子都为空（叶子节点），直接删除节点， 返回NULL为根节点</li>
+<li>删除节点的左孩子为空，右孩子不为空，删除节点，右孩子补位，返回右孩子为根节点</li>
 </ul>
-<p><a href="https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">106. Construct Binary Tree from Inorder and Postorder Traversal</a></p>
+</li>
+<li>删除节点的右孩子为空，左孩子不为空，删除节点，左孩子补位，返回左孩子为根节点</li>
+<li>左右孩子节点都不为空，则将删除节点的左子树头结点（左孩子）放到删除节点的右子树的最左面节点的左孩子上，返回删除节点右孩子为新的根节点</li>
+</ul>
 <pre><code class="language-cpp">class Solution {
 public:
-    TreeNode* helper(int postend, int instart, int inend, vector&lt;int&gt;&amp;in, vector&lt;int&gt;&amp;post) {
-        if (postend &lt; 0 || instart &gt; inend) {
-            return NULL;
-        }
-        TreeNode* root = new TreeNode(post[postend]);
-        int idx = 0;
-        for (int i = instart; i &lt;= inend; i++) {
-            if (in[i] == post[postend]) {
-                idx = i;
-                break;
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if (!root) {
+            return root;
+        } 
+        if (root-&gt;val == key) {
+            if (!root-&gt;left &amp;&amp; !root-&gt;right) {
+                delete root;
+                return NULL;
+            } else if (!root-&gt;left) {
+                TreeNode* node = root-&gt;right;
+                delete root;
+                return node;
+            } else if (!root-&gt;right) {
+                TreeNode* node = root-&gt;left;
+                delete root;
+                return node;
+            } else {
+                TreeNode* cur = root-&gt;right;
+                while (cur-&gt;left) {
+                    cur = cur-&gt;left;
+                }
+                cur-&gt;left = root-&gt;left;
+                TreeNode* tmp = root;
+                root = root-&gt;right;
+                delete tmp;
+                return root;
             }
         }
-        root-&gt;left = helper(postend - (inend - idx + 1), instart, idx - 1, in, post);
-        root-&gt;right = helper(postend - 1, idx + 1, inend, in, post);
+        if (root-&gt;val &gt; key) {
+            root-&gt;left = deleteNode(root-&gt;left, key);
+        }
+        if (root-&gt;val &lt; key) {
+            root-&gt;right = deleteNode(root-&gt;right, key);
+        }
         return root;
     }
+};
 
-    TreeNode* buildTree(vector&lt;int&gt;&amp; inorder, vector&lt;int&gt;&amp; postorder) {
-        return helper(postorder.size() - 1, 0, inorder.size() - 1, inorder, postorder);
-    }
-};
-</code></pre>
-<p><a href="https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">105. Construct Binary Tree from Preorder and Inorder Traversal</a></p>
-<pre><code class="language-cpp">class Solution {
+// 普通二叉树删除节点
+class Solution {
 public:
-    TreeNode* helper(int prestart, int instart, int inend, vector&lt;int&gt;&amp;pre, vector&lt;int&gt;&amp;in) {
-        if (prestart &gt;= pre.size() || instart &gt; inend) {
-            return NULL;
-        }
-        TreeNode* root = new TreeNode(pre[prestart]);
-        int idx = 0;
-        for (int i = instart; i &lt;= inend; i++) {
-            if (in[i] == pre[prestart]) {
-                idx = i;
-                break;
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if (root == nullptr) return root;
+        if (root-&gt;val == key) {
+            if (root-&gt;right == nullptr) { // 这里第二次操作目标值：最终删除的作用
+                return root-&gt;left;
             }
+            TreeNode *cur = root-&gt;right;
+            while (cur-&gt;left) {
+                cur = cur-&gt;left;
+            }
+            swap(root-&gt;val, cur-&gt;val); // 这里第一次操作目标值：交换目标值其右子树最左面节点。
         }
-        root-&gt;left = helper(prestart + 1, instart, idx - 1, pre, in);
-        root-&gt;right = helper(prestart + idx - instart + 1, idx + 1, inend, pre, in);
+        root-&gt;left = deleteNode(root-&gt;left, key);
+        root-&gt;right = deleteNode(root-&gt;right, key);
         return root;
     }
-    TreeNode* buildTree(vector&lt;int&gt;&amp; preorder, vector&lt;int&gt;&amp; inorder) {
-        return helper(0, 0, inorder.size() - 1, preorder, inorder);
-    }
 };
 </code></pre>
-<p>前序和后序不能唯一确定一棵二叉树，因为没有中序遍历无法确定左右部分，无法分割。</p>
 
 
 
@@ -980,7 +1014,7 @@ public:
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day17.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Day 17 二叉树, 二叉搜索树" rel="prev">
+          <a href="2023-05-01-multithreading.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: 并发编程 1, 2 (lianglianglee)" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -989,20 +1023,20 @@ public:
                 Previous
               </span>
               <div class="md-ellipsis">
-                Day 17 二叉树, 二叉搜索树
+                并发编程 1, 2 (lianglianglee)
               </div>
             </div>
           </a>
         
         
           
-          <a href="2023-05-15-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day15.html" class="md-footer__link md-footer__link--next" aria-label="Next: Day 15 二叉树" rel="next">
+          <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day18.html" class="md-footer__link md-footer__link--next" aria-label="Next: Day 18 二叉树, 二叉搜索树" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Day 15 二叉树
+                Day 18 二叉树, 二叉搜索树
               </div>
             </div>
             <div class="md-footer__button md-icon">
