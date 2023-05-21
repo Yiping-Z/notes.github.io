@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://yiping-z.github.io/notes/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day19.html">
       
       
+        <link rel="prev" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day20.html">
+      
+      
+        <link rel="next" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day18.html">
       
       <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
@@ -249,6 +253,8 @@
         
   
   
+    
+  
 
 
   
@@ -260,7 +266,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day18.html" class="md-tabs__link">
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day20.html" class="md-tabs__link md-tabs__link--active">
         算法
       </a>
     </li>
@@ -522,14 +528,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
       
       
       
@@ -538,7 +546,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           算法
@@ -549,14 +557,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
       
       
       
@@ -565,12 +575,48 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4_1">
           <span class="md-nav__icon md-icon"></span>
           代码随想录
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day20.html" class="md-nav__link">
+        Day 20 二叉搜索树
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day19.html" class="md-nav__link md-nav__link--active">
+        Day 19 二叉搜索树
+      </a>
+      
+    </li>
+  
+
+            
           
             
               
@@ -831,11 +877,12 @@
 
   <h1>Day 19 二叉搜索树</h1>
 
-<p>完全二叉树一定是平衡二叉树，堆的排序是父节点大于子节点，而搜索树是父节点大于左孩子，小于右孩子，所以堆不是平衡二叉搜索树</p>
+<p>完全二叉树一定是平衡二叉树，堆的排序是父节点大于子节点，<br>
+而搜索树是父节点大于左孩子，小于右孩子，所以堆不是平衡二叉搜索树</p>
 <p><a href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/">235. Lowest Common Ancestor of a Binary Search Tree</a></p>
-<p>思路：
-二叉树：如果node本身是自己的ancestor，那么只有left/right一边有值，另一边为空值，所以必须搜索整个二叉树
-二叉搜索树：从上向下去递归遍历，第一次遇到 cur节点是数值在[p, q]区间中，那么cur就是 p和q的最近公共祖先。不需要遍历整个树。</p>
+<p>思路：<br>
+二叉树：如果node本身是自己的ancestor，那么只有left/right一边有值，另一边为空值，必须搜索整个二叉树<br>
+二叉搜索树：从上向下去递归遍历，第一次遇到 cur节点是数值在[p, q]区间中，那么cur就是p和q的最近公共祖先。不需要遍历整个树。</p>
 <pre><code class="language-cpp">class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
@@ -974,6 +1021,44 @@ public:
       
         <footer class="md-footer">
   
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day20.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Day 20 二叉搜索树" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Day 20 二叉搜索树
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day18.html" class="md-footer__link md-footer__link--next" aria-label="Next: Day 18 二叉树, 二叉搜索树" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Day 18 二叉树, 二叉搜索树
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
