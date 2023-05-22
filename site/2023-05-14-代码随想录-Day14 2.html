@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://yiping-z.github.io/notes/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day21.html">
+        <link rel="canonical" href="https://yiping-z.github.io/notes/2023-05-14-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day14.html">
       
       
-        <link rel="prev" href="2023-05-01-multithreading.html">
+        <link rel="prev" href="2023-05-15-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day15.html">
       
       
-        <link rel="next" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day20.html">
+        <link rel="next" href="2023-04-30-%E8%8B%B1%E9%9B%84%E7%AE%97%E6%B3%95%E8%81%94%E7%9B%9F-Day30.html">
       
       <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
     
     
       
-        <title>Day 21 回溯 - Yiping's Notes</title>
+        <title>Day 14 二叉树 - Yiping's Notes</title>
       
     
     
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Day 21 回溯
+              Day 14 二叉树
             
           </span>
         </div>
@@ -586,19 +586,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day21.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day21.html" class="md-nav__link">
         Day 21 回溯
       </a>
-      
     </li>
   
 
@@ -692,11 +684,19 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="2023-05-14-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day14.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="2023-05-14-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day14.html" class="md-nav__link md-nav__link--active">
         Day 14 二叉树
       </a>
+      
     </li>
   
 
@@ -889,58 +889,120 @@
   
 
 
-  <h1>Day 21 回溯</h1>
+  <h1>Day 14 二叉树</h1>
 
-<p><strong>回溯法</strong>，一般可以解决如下几种问题：</p>
-<ul>
-<li>组合问题：N个数里面按一定规则找出k个数的集合</li>
-<li>切割问题：一个字符串按一定规则有几种切割方式</li>
-<li>子集问题：一个N个数的集合里有多少符合条件的子集</li>
-<li>排列问题：N个数按一定规则全排列，有几种排列方式</li>
-<li>棋盘问题：N皇后，解数独等等</li>
-</ul>
-<p>回溯法解决的问题都可以抽象为树形结构。<br>
-因为回溯法解决的都是在集合中递归查找子集，集合的大小就构成了树的宽度，递归的深度，都构成的树的深度。
-<img alt="在这里插入图片描述" src="https://img-blog.csdnimg.cn/f0d51476bddb409a8ef105575b390b96.png" /> <br>
-for循环可以理解是横向遍历，backtracking（递归）就是纵向遍历</p>
-<p><a href="https://leetcode.cn/problems/combinations/">77. Combinations</a></p>
-<pre><code class="language-cpp">class Solution {
+<p><a href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">104. Maximum Depth of Binary Tree</a></p>
+<p>前序求的是深度，后序求的是高度。<br>
+二叉树节点的深度：指从根节点到该节点的最长简单路径边的条数或者节点数（取决于深度从0开始还是从1开始）<br>
+二叉树节点的高度：指从该节点到叶子节点的最长简单路径边的条数后者节点数（取决于高度从0开始还是从1开始）<br></p>
+<pre><code class="language-cpp">class solution {
 public:
-    vector&lt;vector&lt;int&gt;&gt;res;
-    void permutate(vector&lt;int&gt;&amp;num, int curr, int end, int k) {
-        if (num.size() == k) {
-            res.push_back(num);
-            return;
-        }
-        // 剪枝优化：
-        // for (int i = curr; i &lt;= n - (k - num.size()) + 1; i++)  {
-        // i为本次搜索的起始位置
-        for (int i = curr; i &lt;= end; i++) {
-            num.push_back(i);
-            permutate(num, i + 1, end, k);
-            num.pop_back();
-        }
+    int getdepth(treenode* node) {
+        if (node == NULL) return 0;
+        int leftdepth = getdepth(node-&gt;left);       // 左
+        int rightdepth = getdepth(node-&gt;right);     // 右
+        int depth = 1 + max(leftdepth, rightdepth); // 中
+        return depth;
     }
-    vector&lt;vector&lt;int&gt;&gt; combine(int n, int k) {
-        vector&lt;int&gt;temp;
-        permutate(temp, 1, n, k);
-        return res;
+    int maxdepth(treenode* root) {
+        return getdepth(root);
     }
 };
 </code></pre>
-<p>模版：</p>
-<pre><code class="language-cpp">void backtracking(参数) {
-    if (终止条件) {
-        存放结果;
-        return;
+<pre><code class="language-cpp">class solution {
+public:
+    int result;
+    void getdepth(treenode* node, int depth) {
+        result = depth &gt; result ? depth : result; // 中
+        if (node-&gt;left == NULL &amp;&amp; node-&gt;right == NULL) return ;
+        if (node-&gt;left) { // 左
+            getdepth(node-&gt;left, depth + 1);
+        }
+        if (node-&gt;right) { // 右
+            getdepth(node-&gt;right, depth + 1);
+        }
+        return ;
+    }
+    int maxdepth(treenode* root) {
+        result = 0;
+        if (root == 0) return result;
+        getdepth(root, 1);
+        return result;
+    }
+};
+</code></pre>
+<p><a href="https://leetcode.cn/problems/minimum-depth-of-binary-tree/">105.Minimum Depth of Binary Tree</a></p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int minDepth(TreeNode* root) {
+        if (root == NULL) return 0;
+        if (root-&gt;left == NULL &amp;&amp; root-&gt;right != NULL) {
+            return 1 + minDepth(root-&gt;right);
+        }
+        if (root-&gt;left != NULL &amp;&amp; root-&gt;right == NULL) {
+            return 1 + minDepth(root-&gt;left);
+        }
+        return 1 + min(minDepth(root-&gt;left), minDepth(root-&gt;right));
+    }
+};
+</code></pre>
+<pre><code class="language-cpp">class Solution {
+private:
+    int result;
+    void getdepth(TreeNode* node, int depth) {
+        if (node-&gt;left == NULL &amp;&amp; node-&gt;right == NULL) {
+            result = min(depth, result);  
+            return;
+        }
+        // 中 只不过中没有处理的逻辑
+        if (node-&gt;left) { // 左
+            getdepth(node-&gt;left, depth + 1);
+        }
+        if (node-&gt;right) { // 右
+            getdepth(node-&gt;right, depth + 1);
+        }
+        return ;
     }
 
-    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {
-        处理节点;
-        backtracking(路径，选择列表); // 递归
-        回溯，撤销处理结果
+public:
+    int minDepth(TreeNode* root) {
+        if (root == NULL) return 0;
+        result = INT_MAX;
+        getdepth(root, 1);
+        return result;
     }
-}
+};
+</code></pre>
+<p><a href="https://leetcode.cn/problems/count-complete-tree-nodes/">222. Count Complete Tree Nodes</a></p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int countNodes(TreeNode* root) {
+        if (root == NULL) return 0;
+        return 1 + countNodes(root-&gt;left) + countNodes(root-&gt;right);
+    }
+};
+</code></pre>
+<pre><code class="language-cpp">class Solution {
+public:
+    int countNodes(TreeNode* root) {
+        if (root == nullptr) return 0;
+        TreeNode* left = root-&gt;left;
+        TreeNode* right = root-&gt;right;
+        int leftDepth = 0, rightDepth = 0; // 这里初始为0是有目的的，为了下面求指数方便
+        while (left) {  // 求左子树深度
+            left = left-&gt;left;
+            leftDepth++;
+        }
+        while (right) { // 求右子树深度
+            right = right-&gt;right;
+            rightDepth++;
+        }
+        if (leftDepth == rightDepth) {
+            return (2 &lt;&lt; leftDepth) - 1; // 注意(2&lt;&lt;1) 相当于2^2，所以leftDepth初始为0
+        }
+        return countNodes(root-&gt;left) + countNodes(root-&gt;right) + 1;
+    }
+};
 </code></pre>
 
 
@@ -972,7 +1034,7 @@ public:
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="2023-05-01-multithreading.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: 并发编程 1, 2 (lianglianglee)" rel="prev">
+          <a href="2023-05-15-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day15.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Day 15 二叉树" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -981,20 +1043,20 @@ public:
                 Previous
               </span>
               <div class="md-ellipsis">
-                并发编程 1, 2 (lianglianglee)
+                Day 15 二叉树
               </div>
             </div>
           </a>
         
         
           
-          <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day20.html" class="md-footer__link md-footer__link--next" aria-label="Next: Day 20 二叉搜索树" rel="next">
+          <a href="2023-04-30-%E8%8B%B1%E9%9B%84%E7%AE%97%E6%B3%95%E8%81%94%E7%9B%9F-Day30.html" class="md-footer__link md-footer__link--next" aria-label="Next: Day 30 状态压缩, 拓扑排序" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Day 20 二叉搜索树
+                Day 30 状态压缩, 拓扑排序
               </div>
             </div>
             <div class="md-footer__button md-icon">

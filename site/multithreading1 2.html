@@ -8,20 +8,16 @@
       
       
       
-        <link rel="canonical" href="https://yiping-z.github.io/notes/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day21.html">
+        <link rel="canonical" href="https://yiping-z.github.io/notes/multithreading1.html">
       
       
-        <link rel="prev" href="2023-05-01-multithreading.html">
-      
-      
-        <link rel="next" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day20.html">
       
       <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
     
     
       
-        <title>Day 21 回溯 - Yiping's Notes</title>
+        <title>并发编程 1, 2 (lianglianglee) - Yiping's Notes</title>
       
     
     
@@ -103,7 +99,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Day 21 回溯
+              并发编程 1, 2 (lianglianglee)
             
           </span>
         </div>
@@ -253,8 +249,6 @@
         
   
   
-    
-  
 
 
   
@@ -266,7 +260,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day21.html" class="md-tabs__link md-tabs__link--active">
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day21.html" class="md-tabs__link">
         算法
       </a>
     </li>
@@ -528,16 +522,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
       
       
       
@@ -546,7 +538,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           算法
@@ -557,16 +549,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
       
       
       
@@ -575,7 +565,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_4_1">
           <span class="md-nav__icon md-icon"></span>
           代码随想录
@@ -586,19 +576,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day21.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day21.html" class="md-nav__link">
         Day 21 回溯
       </a>
-      
     </li>
   
 
@@ -889,59 +871,22 @@
   
 
 
-  <h1>Day 21 回溯</h1>
+  <h1>并发编程 1, 2 (lianglianglee)</h1>
 
-<p><strong>回溯法</strong>，一般可以解决如下几种问题：</p>
-<ul>
-<li>组合问题：N个数里面按一定规则找出k个数的集合</li>
-<li>切割问题：一个字符串按一定规则有几种切割方式</li>
-<li>子集问题：一个N个数的集合里有多少符合条件的子集</li>
-<li>排列问题：N个数按一定规则全排列，有几种排列方式</li>
-<li>棋盘问题：N皇后，解数独等等</li>
-</ul>
-<p>回溯法解决的问题都可以抽象为树形结构。<br>
-因为回溯法解决的都是在集合中递归查找子集，集合的大小就构成了树的宽度，递归的深度，都构成的树的深度。
-<img alt="在这里插入图片描述" src="https://img-blog.csdnimg.cn/f0d51476bddb409a8ef105575b390b96.png" /> <br>
-for循环可以理解是横向遍历，backtracking（递归）就是纵向遍历</p>
-<p><a href="https://leetcode.cn/problems/combinations/">77. Combinations</a></p>
-<pre><code class="language-cpp">class Solution {
-public:
-    vector&lt;vector&lt;int&gt;&gt;res;
-    void permutate(vector&lt;int&gt;&amp;num, int curr, int end, int k) {
-        if (num.size() == k) {
-            res.push_back(num);
-            return;
-        }
-        // 剪枝优化：
-        // for (int i = curr; i &lt;= n - (k - num.size()) + 1; i++)  {
-        // i为本次搜索的起始位置
-        for (int i = curr; i &lt;= end; i++) {
-            num.push_back(i);
-            permutate(num, i + 1, end, k);
-            num.pop_back();
-        }
-    }
-    vector&lt;vector&lt;int&gt;&gt; combine(int n, int k) {
-        vector&lt;int&gt;temp;
-        permutate(temp, 1, n, k);
-        return res;
-    }
-};
+<p>创建线程方法</p>
+<pre><code class="language-java">public class RunnableThread implements Runnable {
+public class ExtendsThread extends Thread {
 </code></pre>
-<p>模版：</p>
-<pre><code class="language-cpp">void backtracking(参数) {
-    if (终止条件) {
-        存放结果;
-        return;
-    }
-
-    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {
-        处理节点;
-        backtracking(路径，选择列表); // 递归
-        回溯，撤销处理结果
-    }
-}
-</code></pre>
+<p>Callable, 线程池</p>
+<p>实现 Runnable 接口比继承 Thread 类实现线程要好
+1. 实现了 Runnable 与 Thread 类的解耦，Runnable 里只有一个 run() 方法，它定义了需要执行的内容，Thread 类负责线程启动和属性设置等内容。
+2. 使用继承 Thread 类方式，每次执行一次任务，都需要新建一个独立的线程，执行完任务后线程走到生命周期的尽头被销毁，如果还想执行这个任务，就必须再新建一个继承了 Thread 类的类。
+使用实现 Runnable 接口的方式，就可以把任务直接传入线程池，使用一些固定的线程来完成任务，不需要每次新建销毁线程，大大降低了性能开销
+3. Java 语言不支持双继承，如果我们的类一旦继承了 Thread 类，那么它后续就没有办法再继承其他的类，限制可拓展性</p>
+<p>用 interrupt停止线程：请求中断，而不是强制停止，因为这样可以避免数据错乱，也可以让线程有时间结束收尾工作。
+Thread.currentThread().isInterrupted()
+如果 sleep、wait 等可以让线程进入阻塞的方法使线程休眠了，而处于休眠中的线程被中断，那么线程是可以感受到中断信号的，并且会抛出一个 InterruptedException 异常，同时清除中断信号，将中断标记位设置成 false。</p>
+<p>已经被舍弃的 stop()、suspend() 和 resume()，它们由于有很大的安全风险比如死锁风险而被舍弃，而 volatile 这种方法在某些特殊的情况下，比如线程被长时间阻塞的情况，就无法及时感受中断，所以 volatile 是不够全面的停止线程的方法。</p>
 
 
 
@@ -965,44 +910,6 @@ public:
       
         <footer class="md-footer">
   
-    
-      
-        
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
-        
-          
-          <a href="2023-05-01-multithreading.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: 并发编程 1, 2 (lianglianglee)" rel="prev">
-            <div class="md-footer__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              <div class="md-ellipsis">
-                并发编程 1, 2 (lianglianglee)
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day20.html" class="md-footer__link md-footer__link--next" aria-label="Next: Day 20 二叉搜索树" rel="next">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Day 20 二叉搜索树
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
