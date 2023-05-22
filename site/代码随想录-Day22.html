@@ -11,9 +11,13 @@
         <link rel="canonical" href="https://yiping-z.github.io/notes/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day22.html">
       
       
+        <link rel="prev" href="2023-05-01-multithreading.html">
+      
+      
+        <link rel="next" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day21.html">
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.12">
     
     
       
@@ -249,6 +253,8 @@
         
   
   
+    
+  
 
 
   
@@ -260,7 +266,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day21.html" class="md-tabs__link">
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day22.html" class="md-tabs__link md-tabs__link--active">
         算法
       </a>
     </li>
@@ -522,14 +528,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
       
       
       
@@ -538,7 +546,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           算法
@@ -549,14 +557,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
       
       
       
@@ -565,12 +575,34 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4_1">
           <span class="md-nav__icon md-icon"></span>
           代码随想录
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day22.html" class="md-nav__link md-nav__link--active">
+        Day 22 回溯
+      </a>
+      
+    </li>
+  
+
+            
           
             
               
@@ -875,9 +907,11 @@
 
 <p><a href="https://leetcode.cn/problems/combination-sum-iii/">216. Combination Sum III</a></p>
 <p>题目：
-Find all valid combinations of k numbers that sum up to n such that the following conditions are true:
-- Only numbers 1 through 9 are used.
-- Each number is used at most once.</p>
+Find all valid combinations of k numbers that sum up to n such that the following conditions are true:</p>
+<ul>
+<li>Only numbers 1 through 9 are used.</li>
+<li>Each number is used at most once.</li>
+</ul>
 <p>Return a list of all possible valid combinations. The list must not contain the same combination twice, and the combinations may be returned in any order.</p>
 <pre><code class="language-cpp">class Solution {
 public:
@@ -898,6 +932,44 @@ public:
     vector&lt;vector&lt;int&gt;&gt; combinationSum3(int k, int n) {
         vector&lt;int&gt;num;
         permutate(1, 0, k, n, num);
+        return res;
+    }
+};
+</code></pre>
+<p><a href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/">17. Letter Combinations of a Phone Number</a></p>
+<p>Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.</p>
+<p>A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+<img alt="" src="https://img-blog.csdnimg.cn/e3c08be9ac404db691ce80402e85dced.png" /></p>
+<pre><code class="language-cpp">class Solution {
+public:
+    vector&lt;string&gt;mp;
+    vector&lt;string&gt;res;
+    void permutate(string digits, string str, int idx) {
+        if (str.length() == digits.length()) {
+            res.push_back(str);
+            return;
+        }
+        for (auto x: mp[digits[idx] - '0']) {
+            str += x;
+            permutate(digits, str, idx + 1);
+            str.pop_back();
+        }
+    }
+    vector&lt;string&gt; letterCombinations(string digits) {
+        if (digits.length() == 0) {
+            return {};
+        }
+        mp = vector&lt;string&gt;(10);
+        mp[2] = &quot;abc&quot;;
+        mp[3] = &quot;def&quot;;
+        mp[4] = &quot;ghi&quot;;
+        mp[5] = &quot;jkl&quot;;
+        mp[6] = &quot;mno&quot;;
+        mp[7] = &quot;pqrs&quot;;
+        mp[8] = &quot;tuv&quot;;
+        mp[9] = &quot;wxyz&quot;;
+        string str = &quot;&quot;;
+        permutate(digits, str, 0);
         return res;
     }
 };
@@ -925,6 +997,44 @@ public:
       
         <footer class="md-footer">
   
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="2023-05-01-multithreading.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: 并发编程 1, 2 (lianglianglee)" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                并发编程 1, 2 (lianglianglee)
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day21.html" class="md-footer__link md-footer__link--next" aria-label="Next: Day 21 回溯" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Day 21 回溯
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -970,7 +1080,7 @@ public:
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tracking", "navigation.tabs", "navigation.top", "navigation.footer", "navigation.tabs.sticky", "navigation.path"], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="assets/javascripts/bundle.c2be25ad.min.js"></script>
       
     
   </body>

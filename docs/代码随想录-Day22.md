@@ -38,3 +38,48 @@ public:
     }
 };
 ```
+
+
+[17. Letter Combinations of a Phone Number](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/)
+
+Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+
+A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+![在这里插入图片描述](https://img-blog.csdnimg.cn/e3c08be9ac404db691ce80402e85dced.png)
+
+
+```cpp
+class Solution {
+public:
+    vector<string>mp;
+    vector<string>res;
+    void permutate(string digits, string str, int idx) {
+        if (str.length() == digits.length()) {
+            res.push_back(str);
+            return;
+        }
+        for (auto x: mp[digits[idx] - '0']) {
+            str += x;
+            permutate(digits, str, idx + 1);
+            str.pop_back();
+        }
+    }
+    vector<string> letterCombinations(string digits) {
+        if (digits.length() == 0) {
+            return {};
+        }
+        mp = vector<string>(10);
+        mp[2] = "abc";
+        mp[3] = "def";
+        mp[4] = "ghi";
+        mp[5] = "jkl";
+        mp[6] = "mno";
+        mp[7] = "pqrs";
+        mp[8] = "tuv";
+        mp[9] = "wxyz";
+        string str = "";
+        permutate(digits, str, 0);
+        return res;
+    }
+};
+```
