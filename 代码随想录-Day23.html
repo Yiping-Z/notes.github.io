@@ -17,7 +17,7 @@
         <link rel="next" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day22.html">
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.12">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
     
     
       
@@ -951,6 +951,39 @@ public:
 };
 </code></pre>
 <p><a href="https://leetcode.cn/problems/combination-sum-ii/">40. Combination Sum II</a></p>
+<p>思路：和39题的区别是有重复的数字，但是不可以有重复的位置<br>
+同一树层不可以重复，同一树枝可以重复</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    set&lt;vector&lt;int&gt;&gt;res;
+    void permutate(vector&lt;int&gt;&amp;nums, int sum, int idx, int target, vector&lt;int&gt;num) {
+        if (sum &gt;= target || idx &gt;= nums.size()) {
+            if (sum == target) {
+                res.insert(num);
+            }
+            return;
+        }
+        for (int i = idx; i &lt; nums.size() &amp;&amp; sum + nums[i] &lt;= target; i++) {
+            // 同一个位置不选一样的数字 
+            if (i &gt; idx &amp;&amp; nums[i] == nums[i - 1]) {
+                continue;
+            }
+            num.push_back(nums[i]);
+            permutate(nums, sum + nums[i], i + 1, target, num);
+            num.pop_back();
+        }
+    }
+    vector&lt;vector&lt;int&gt;&gt; combinationSum2(vector&lt;int&gt;&amp; candidates, int target) {
+        vector&lt;int&gt;num;
+        sort(candidates.begin(), candidates.end()); 
+        permutate(candidates, 0, 0, target, num);
+        return vector&lt;vector&lt;int&gt;&gt;(res.begin(), res.end());
+    }
+};
+</code></pre>
+<p><a href="https://leetcode.cn/problems/palindrome-partitioning/">131. Palindrome Partitioning</a></p>
+<p>题目：Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s.</p>
+<p>优化：将所有可能的substring是否为回文串提前算好</p>
 
 
 
@@ -1057,7 +1090,7 @@ public:
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tracking", "navigation.tabs", "navigation.top", "navigation.footer", "navigation.tabs.sticky", "navigation.path"], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.c2be25ad.min.js"></script>
+      <script src="assets/javascripts/bundle.b4d07000.min.js"></script>
       
     
   </body>
