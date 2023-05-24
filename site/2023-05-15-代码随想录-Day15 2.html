@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://yiping-z.github.io/notes/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day24.html">
+        <link rel="canonical" href="https://yiping-z.github.io/notes/2023-05-15-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day15.html">
       
       
-        <link rel="prev" href="2023-05-01-multithreading.html">
+        <link rel="prev" href="2023-05-16-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day16.html">
       
       
-        <link rel="next" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day23.html">
+        <link rel="next" href="2023-05-14-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day14.html">
       
       <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
     
     
       
-        <title>Day 24 回溯 - Yiping's Notes</title>
+        <title>Day 15 二叉树 - Yiping's Notes</title>
       
     
     
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Day 24 回溯
+              Day 15 二叉树
             
           </span>
         </div>
@@ -586,19 +586,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day24.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day24.html" class="md-nav__link">
         Day 24 回溯
       </a>
-      
     </li>
   
 
@@ -720,11 +712,19 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="2023-05-15-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day15.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="2023-05-15-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day15.html" class="md-nav__link md-nav__link--active">
         Day 15 二叉树
       </a>
+      
     </li>
   
 
@@ -931,95 +931,34 @@
   
 
 
-  <h1>Day 24 回溯</h1>
+  <h1>Day 15 二叉树</h1>
 
-<p><a href="https://leetcode.cn/problems/restore-ip-addresses/">93. Restore IP Addresses</a></p>
-<p>题目：Given a string s containing only digits, return all possible valid IP addresses that can be formed by inserting dots into s. You are not allowed to reorder or remove any digits in s. You may return the valid IP addresses in any order.</p>
+<p><a href="https://leetcode.cn/problems/balanced-binary-tree/">110. Balanced Binary Tree</a></p>
+<p>求高度（该节点到叶子节点），后序遍历</p>
 <pre><code class="language-cpp">class Solution {
 public:
-    vector&lt;string&gt;res;
-    bool isValid(int l, int r, string s) {
-        if (r - l &gt; 0 &amp;&amp; s[l] == '0') {
-            return false;
+    int getHeight(TreeNode* root) {
+        if(!root) {
+            return 0;
         }
-        int num = stoi(s.substr(l, r - l + 1));
-        return num &gt;= 0 &amp;&amp; num &lt;= 255;
+        int l = getHeight(root-&gt;left);
+        if (l == -1) {
+            return -1;
+        }
+        int r = getHeight(root-&gt;right);
+        if (r == -1) {
+            return -1;
+        }
+        return abs(l - r) &lt;= 1 ? 1 + max(l, r) : -1;
     }
-    void permutate(int idx, string curr, string s, int count) {
-        if (idx == s.length()) {
-            if (count == 4) {
-                res.push_back(curr.substr(0, curr.length() - 1));
-            }
-            return;
-        }
-        for (int i = idx; i &lt; idx + 3 &amp;&amp; i &lt; s.length(); i++) {
-            if (isValid(idx, i, s) &amp;&amp; count &lt; 4) {
-                curr += (s.substr(idx, i - idx + 1) + &quot;.&quot;);
-                permutate(i + 1, curr, s, count + 1);
-                curr = curr.substr(0, curr.length() - (i - idx + 2));
-            }
-        }
-    }
-    vector&lt;string&gt; restoreIpAddresses(string s) {
-        permutate(0, &quot;&quot;, s, 0);
-        return res;
+    bool isBalanced(TreeNode* root) {
+        return getHeight(root) == -1 ? false : true;
     }
 };
 </code></pre>
-<p><a href="https://leetcode.cn/problems/subsets/">78. Subsets</a></p>
-<p>题目： Given an integer array nums of unique elements, return all possible subsets (the power set).</p>
-<p>The solution set must not contain duplicate subsets. Return the solution in any order.</p>
-<p>思路： 合问题和分割问题都是收集树的叶子节点，而子集问题是找树的所有节点</p>
-<pre><code class="language-cpp">class Solution {
-public:
-    vector&lt;vector&lt;int&gt;&gt;res;
-    void permutate(int idx, vector&lt;int&gt;&amp;nums, vector&lt;int&gt;num) {
-        res.push_back(num);
-        if (idx == nums.size()) {
-            return;
-        }
-        for (int i = idx; i &lt; nums.size(); i++) {
-            num.push_back(nums[i]);
-            permutate(i + 1, nums, num);
-            num.pop_back();
-        }
-    }
-    vector&lt;vector&lt;int&gt;&gt; subsets(vector&lt;int&gt;&amp; nums) {
-        vector&lt;int&gt;num;
-        permutate(0, nums, num);
-        return res;
-    }
-};
-</code></pre>
-<p><a href="https://leetcode.cn/problems/subsets-ii/">90. Subsets II</a></p>
-<p>题目：Given an integer array nums that may contain duplicates, return all possible subsets (the power set).</p>
-<p>The solution set must not contain duplicate subsets. Return the solution in any order.</p>
-<pre><code class="language-cpp">class Solution {
-public:
-    vector&lt;vector&lt;int&gt;&gt;res;
-    void permutate(int idx, vector&lt;int&gt;&amp;nums, vector&lt;int&gt;num) {
-        res.push_back(num);
-        if (idx == nums.size()) {
-            return;
-        }
-        for (int i = idx; i &lt; nums.size(); i++) {
-            //  去重
-            if (i != idx &amp;&amp; nums[i - 1] == nums[i]) {
-                continue;
-            }
-            num.push_back(nums[i]);
-            permutate(i + 1, nums, num);
-            num.pop_back();
-        }
-    }
-    vector&lt;vector&lt;int&gt;&gt; subsetsWithDup(vector&lt;int&gt;&amp; nums) {
-        vector&lt;int&gt;num;
-        sort(nums.begin(), nums.end());
-        permutate(0, nums, num);
-        return res;
-    }
-};
-</code></pre>
+<p><a href="https://leetcode.cn/problems/binary-tree-paths/">257. Binary Tree Paths</a></p>
+<p>void traversal(TreeNode<em> cur, </em><em>string path,</em>* vector<string>&amp; result): 每次都是复制赋值，不用使用引用 (相当于backtrack)</p>
+<p>迭代: 如果是模拟前中后序遍历就用栈，如果是适合层序遍历就用队列，当然还是其他情况，那么就是 先用队列试试行不行，不行就用栈</p>
 
 
 
@@ -1050,7 +989,7 @@ public:
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="2023-05-01-multithreading.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: 并发编程 1, 2 (lianglianglee)" rel="prev">
+          <a href="2023-05-16-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day16.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Day 16 二叉树" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -1059,20 +998,20 @@ public:
                 Previous
               </span>
               <div class="md-ellipsis">
-                并发编程 1, 2 (lianglianglee)
+                Day 16 二叉树
               </div>
             </div>
           </a>
         
         
           
-          <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day23.html" class="md-footer__link md-footer__link--next" aria-label="Next: Day 23 回溯" rel="next">
+          <a href="2023-05-14-%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day14.html" class="md-footer__link md-footer__link--next" aria-label="Next: Day 14 二叉树" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Day 23 回溯
+                Day 14 二叉树
               </div>
             </div>
             <div class="md-footer__button md-icon">

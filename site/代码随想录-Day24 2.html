@@ -966,60 +966,6 @@ public:
     }
 };
 </code></pre>
-<p><a href="https://leetcode.cn/problems/subsets/">78. Subsets</a></p>
-<p>题目： Given an integer array nums of unique elements, return all possible subsets (the power set).</p>
-<p>The solution set must not contain duplicate subsets. Return the solution in any order.</p>
-<p>思路： 合问题和分割问题都是收集树的叶子节点，而子集问题是找树的所有节点</p>
-<pre><code class="language-cpp">class Solution {
-public:
-    vector&lt;vector&lt;int&gt;&gt;res;
-    void permutate(int idx, vector&lt;int&gt;&amp;nums, vector&lt;int&gt;num) {
-        res.push_back(num);
-        if (idx == nums.size()) {
-            return;
-        }
-        for (int i = idx; i &lt; nums.size(); i++) {
-            num.push_back(nums[i]);
-            permutate(i + 1, nums, num);
-            num.pop_back();
-        }
-    }
-    vector&lt;vector&lt;int&gt;&gt; subsets(vector&lt;int&gt;&amp; nums) {
-        vector&lt;int&gt;num;
-        permutate(0, nums, num);
-        return res;
-    }
-};
-</code></pre>
-<p><a href="https://leetcode.cn/problems/subsets-ii/">90. Subsets II</a></p>
-<p>题目：Given an integer array nums that may contain duplicates, return all possible subsets (the power set).</p>
-<p>The solution set must not contain duplicate subsets. Return the solution in any order.</p>
-<pre><code class="language-cpp">class Solution {
-public:
-    vector&lt;vector&lt;int&gt;&gt;res;
-    void permutate(int idx, vector&lt;int&gt;&amp;nums, vector&lt;int&gt;num) {
-        res.push_back(num);
-        if (idx == nums.size()) {
-            return;
-        }
-        for (int i = idx; i &lt; nums.size(); i++) {
-            //  去重
-            if (i != idx &amp;&amp; nums[i - 1] == nums[i]) {
-                continue;
-            }
-            num.push_back(nums[i]);
-            permutate(i + 1, nums, num);
-            num.pop_back();
-        }
-    }
-    vector&lt;vector&lt;int&gt;&gt; subsetsWithDup(vector&lt;int&gt;&amp; nums) {
-        vector&lt;int&gt;num;
-        sort(nums.begin(), nums.end());
-        permutate(0, nums, num);
-        return res;
-    }
-};
-</code></pre>
 
 
 
