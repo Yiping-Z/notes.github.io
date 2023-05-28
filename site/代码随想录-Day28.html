@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://yiping-z.github.io/notes/2023-05-01-spring.html">
+        <link rel="canonical" href="https://yiping-z.github.io/notes/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day28.html">
       
       
-        <link rel="prev" href="2023-05-07-spring.html">
+        <link rel="prev" href="2023-05-01-multithreading.html">
       
       
-        <link rel="next" href="2023-05-01-multithreading.html">
+        <link rel="next" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day27.html">
       
       <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
     
     
       
-        <title>Spring5 框架, 要点, IOC (pdai) - Yiping's Notes</title>
+        <title>Day 28 贪心 - Yiping's Notes</title>
       
     
     
@@ -72,11 +72,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#spring" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -108,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Spring5 框架, 要点, IOC (pdai)
+              Day 28 贪心
             
           </span>
         </div>
@@ -212,8 +207,6 @@
         
   
   
-    
-  
 
 
   
@@ -225,7 +218,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="2023-05-07-spring.html" class="md-tabs__link md-tabs__link--active">
+      <a href="2023-05-07-spring.html" class="md-tabs__link">
         框架
       </a>
     </li>
@@ -260,6 +253,8 @@
         
   
   
+    
+  
 
 
   
@@ -271,7 +266,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day28.html" class="md-tabs__link">
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day28.html" class="md-tabs__link md-tabs__link--active">
         算法
       </a>
     </li>
@@ -353,16 +348,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
       
       
       
@@ -371,7 +364,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           框架
@@ -382,16 +375,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
       
       
       
@@ -400,7 +391,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_1">
           <span class="md-nav__icon md-icon"></span>
           Spring
@@ -425,48 +416,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Spring5 框架, 要点, IOC (pdai)
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="2023-05-01-spring.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="2023-05-01-spring.html" class="md-nav__link">
         Spring5 框架, 要点, IOC (pdai)
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#spring" class="md-nav__link">
-    Spring
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -574,14 +528,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
       
       
       
@@ -590,7 +546,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           算法
@@ -601,14 +557,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
       
       
       
@@ -617,7 +575,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4_1">
           <span class="md-nav__icon md-icon"></span>
           代码随想录
@@ -628,11 +586,19 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day28.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day28.html" class="md-nav__link md-nav__link--active">
         Day 28 贪心
       </a>
+      
     </li>
   
 
@@ -1005,21 +971,6 @@
   
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#spring" class="md-nav__link">
-    Spring
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1036,73 +987,24 @@
   
 
 
-  <h1>Spring5 框架, 要点, IOC (pdai)</h1>
+  <h1>Day 28 贪心</h1>
 
-<h2 id="spring">Spring</h2>
-<p>ORM/DAO -&gt; POJO (IOC容器) -&gt; Service -&gt; Controller</p>
-<ul>
-<li><strong>非侵入式</strong>：基于Spring开发的应用中的对象可以不依赖于Spring的API </li>
-<li><strong>控制反转</strong>：IOC——Inversion of Control，指的是将对象的创建权交给 Spring 去创建。使用 Spring之前，对象的创建都是由我们自己在代码中new创建。而使用 Spring 之后。对象的创建都是给了 Spring 框架。</li>
-<li><strong>依赖注入</strong>：DI——Dependency Injection，是指依赖的对象不需要手动调用 setXX 方法去设置，而是通过配置赋值。</li>
-<li><strong>面向切面编程</strong>：Aspect Oriented Programming——AOP容器：Spring是一个容器，因为它包含并且管理应用对象的生命周期组件化：Spring 实现了使用简单的组件配置组合成一个复杂的应用。在 Spring中可以使用XML和Java注解组合这些对象。 </li>
-<li><strong>一站式</strong>：在 IOC 和 AOP的基础上可以整合各种企业应用的开源框架和优秀的第三方类库（实际上 Spring 自身也提供了表现层的 SpringMVC 和持久层的
-   Spring JDBC）</li>
-</ul>
-<p><strong>Core Container:</strong> beans, core, context (Application Context), SpEL<br>
-<strong>Data Access/Integration</strong>: JDBC/ORM (Object Relational Mapping)/OXM (Object/XML)/JMS (服务消息)/Transaction<br>
-<strong>Web:</strong> web, servlet, websocket, webflux (完全异步且非阻塞), Portlet<br>
-<strong>AOP, Aspects, Instrumentation</strong> (类工具的支持和类加载器的实现), <strong>Messaging, JCL</strong> (日志框架集成的模块)<br>
-<strong>Test</strong>: Junit, TestNG</p>
-<pre><code class="language-java"> /**
-* aspect for every methods under service package.
-*/
-@Around(&quot;execution(* tech.pdai.springframework.service.*.*(..))&quot;)
-public Object businessService(ProceedingJoinPoint pjp) throws Throwable {
-    // get attribute through annotation
-    Method method = ((MethodSignature) pjp.getSignature()).getMethod();
-    System.out.println(&quot;execute method: &quot; + method.getName());
-
-    // continue to process
-    return pjp.proceed();
-}
-</code></pre>
-<p><strong>@Configuration</strong>: These classes consist principally of @Bean-annotated methods that define instantiation, configuration, and initialization logic for objects that are managed by the Spring IoC container.</p>
-<pre><code class="language-java">@Configuration
-public class AppConfig {
-
-    @Bean
-    public TransferService transferService() {
-        return new TransferServiceImpl();
+<p><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/">122. 买卖股票的最佳时机 II</a></p>
+<p><strong>题目</strong>：给你一个整数数组 prices ，其中 prices[i] 表示某支股票第 i 天的价格。</p>
+<p>在每一天，你可以决定是否购买和/或出售股票。你在任何时候 最多 只能持有 一股 股票。你也可以先购买，然后在 同一天 出售。</p>
+<p>返回 你能获得的 最大 利润 。</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int maxProfit(vector&lt;int&gt;&amp; prices) {
+        int result = 0;
+        for (int i = 1; i &lt; prices.size(); i++) {
+            // 每天收集正利润
+            result += max(prices[i] - prices[i - 1], 0);
+        }
+        return result;
     }
-
-}
+};
 </code></pre>
-<p><strong>@Service</strong> annotates classes at the service layer.  它将根据用户请求请求@Repository</p>
-<p><strong>@Repository</strong> annotates classes at the persistence layer, which will act as a database repository</p>
-<p><strong>IOC</strong>: 用户管理Bean转变为框架管理Bean<br>
-<strong>DI</strong>: 应用程序代码从Ioc Container中获取依赖的Bean，注入到应用程序中<br>
-<strong>IOC Config</strong>：XML, 注解， Java<br>
-<strong>依赖注入方式</strong>：构造方法注入（Construct注入），setter注入，基于注解的注入（接口注入）<br>
-<strong>@Autowired</strong>（自动注入）：Constructor，byType，byName<br>
-<strong>构造器注入</strong>的方式能够保证注入的组件不可变，并且确保需要的依赖不为空<br>
-@Target(ElementType.CONSTRUCTOR) #构造函数<br>
-@Target(ElementType.METHOD) #方法<br>
-@Target(ElementType.PARAMETER) #方法参数<br>
-@Target(ElementType.FIELD) #字段、枚举的常量<br>
-@Target(ElementType.ANNOTATION_TYPE) #注解</p>
-<p><strong>@Resource</strong>
-@Target(ElementType.TYPE) #接口、类、枚举、注解<br>
-@Target(ElementType.FIELD) #字段、枚举的常量<br>
-@Target(ElementType.METHOD) #方法</p>
-<p><strong>@Inject</strong>
-@Target(ElementType.CONSTRUCTOR) #构造函数<br>
-@Target(ElementType.METHOD) #方法<br>
-@Target(ElementType.FIELD) #字段、枚举的常量</p>
-<ul>
-<li>@Autowired、@Inject用法基本一样，不同的是@Inject没有required属性</li>
-<li>@Autowired、@Inject是默认按照类型匹配的，@Resource是按照名称匹配的</li>
-<li>@Autowired如果需要按照名称匹配需要和@Qualifier一起使用，@Inject和@Named一起使用，@Resource则通过name进行指定</li>
-</ul>
 
 
 
@@ -1133,7 +1035,7 @@ public class AppConfig {
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="2023-05-07-spring.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Spring5 AOP, MVC, IOC (pdai)" rel="prev">
+          <a href="2023-05-01-multithreading.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: 并发编程 1, 2 (lianglianglee)" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -1142,20 +1044,20 @@ public class AppConfig {
                 Previous
               </span>
               <div class="md-ellipsis">
-                Spring5 AOP, MVC, IOC (pdai)
+                并发编程 1, 2 (lianglianglee)
               </div>
             </div>
           </a>
         
         
           
-          <a href="2023-05-01-multithreading.html" class="md-footer__link md-footer__link--next" aria-label="Next: 并发编程 1, 2 (lianglianglee)" rel="next">
+          <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day27.html" class="md-footer__link md-footer__link--next" aria-label="Next: Day 27 贪心" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                并发编程 1, 2 (lianglianglee)
+                Day 27 贪心
               </div>
             </div>
             <div class="md-footer__button md-icon">
