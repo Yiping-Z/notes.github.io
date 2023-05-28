@@ -1016,6 +1016,118 @@ public:
     }
 };
 </code></pre>
+<p><a href="https://leetcode.cn/problems/n-queens/">51. N-Queens</a></p>
+<p><strong>题目</strong>：n 皇后问题 研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。</p>
+<p>给你一个整数 n ，返回所有不同的 n 皇后问题 的解决方案。</p>
+<p>每一种解法包含一个不同的 n 皇后问题 的棋子放置方案，该方案中 'Q' 和 '.' 分别代表了皇后和空位。</p>
+<p><strong>思路</strong>： 棋盘的宽度就是for循环的长度，递归的深度就是棋盘的高度</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    vector&lt;vector&lt;string&gt;&gt;res;
+    bool isValid(int r, int c, vector&lt;string&gt;&amp;board, int n) {
+        for (int i = 0; i &lt; r; i++) {
+            if (board[i][c] == 'Q') {
+                return false;
+            }
+        }
+        for (int i = r - 1, j = c - 1; i &gt;= 0 &amp;&amp; j &gt;= 0; i--, j--) {
+            if (board[i][j] == 'Q') {
+                return false;
+            }
+        }
+        for (int i = r - 1, j = c + 1; i &gt;= 0 &amp;&amp; j &lt; n; i--, j++) {
+            if (board[i][j] == 'Q') {
+                return false;
+            }
+        }
+        return true;
+    }
+    void backtrack(int n, int r, vector&lt;string&gt;&amp;board) {
+        if (r == n) {
+            res.push_back(board);
+            return;
+        }
+        for (int c = 0; c &lt; n; c++) {
+            if (isValid(r, c, board, n)) {
+                board[r][c] = 'Q';
+                backtrack(n, r + 1, board);
+                board[r][c] = '.';
+            }
+        }
+    }
+    vector&lt;vector&lt;string&gt;&gt; solveNQueens(int n) {
+        vector&lt;string&gt;board(n, string(n, '.'));
+        backtrack(n, 0, board);
+        return res;
+    }
+};
+</code></pre>
+<p><a href="https://leetcode.cn/problems/sudoku-solver/">37. Sudoku Solver</a></p>
+<p><strong>题目</strong>： 编写一个程序，通过填充空格来解决数独问题。</p>
+<p>一个数独的解法需遵循如下规则： 数字 1-9 在每一行只能出现一次。 数字 1-9 在每一列只能出现一次。 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。 空白格用 '.' 表示。</p>
+<pre><code class="language-cpp">class Solution {
+private:
+bool backtracking(vector&lt;vector&lt;char&gt;&gt;&amp; board) {
+    for (int i = 0; i &lt; board.size(); i++) {        // 遍历行
+        for (int j = 0; j &lt; board[0].size(); j++) { // 遍历列
+            if (board[i][j] == '.') {
+                for (char k = '1'; k &lt;= '9'; k++) {     // (i, j) 这个位置放k是否合适
+                    if (isValid(i, j, k, board)) {
+                        board[i][j] = k;                // 放置k
+                        if (backtracking(board)) return true; // 如果找到合适一组立刻返回
+                        board[i][j] = '.';              // 回溯，撤销k
+                    }
+                }
+                return false;  // 9个数都试完了，都不行，那么就返回false
+            }
+        }
+    }
+    return true; // 遍历完没有返回false，说明找到了合适棋盘位置了
+}
+bool isValid(int row, int col, char val, vector&lt;vector&lt;char&gt;&gt;&amp; board) {
+    for (int i = 0; i &lt; 9; i++) { // 判断行里是否重复
+        if (board[row][i] == val) {
+            return false;
+        }
+    }
+    for (int j = 0; j &lt; 9; j++) { // 判断列里是否重复
+        if (board[j][col] == val) {
+            return false;
+        }
+    }
+    int startRow = (row / 3) * 3;
+    int startCol = (col / 3) * 3;
+    for (int i = startRow; i &lt; startRow + 3; i++) { // 判断9方格里是否重复
+        for (int j = startCol; j &lt; startCol + 3; j++) {
+            if (board[i][j] == val ) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+public:
+    void solveSudoku(vector&lt;vector&lt;char&gt;&gt;&amp; board) {
+        backtracking(board);
+    }
+};
+</code></pre>
+<p><strong>子集问题分析</strong>：</p>
+<p>时间复杂度：O(2 ^ n)，因为每一个元素的状态无外乎取与不取，所以时间复杂度为O(2^n)<br>
+空间复杂度：O(n)，递归深度为n，所以系统栈所用空间为O(n)，每一层递归所用的空间都是常数级别，注意代码里的result和path都是全局变量，就算是放在参数里，传的也是引用，并不会新申请内存空间，最终空间复杂度为O(n)</p>
+<p><strong>排列问题分析</strong>：</p>
+<p>时间复杂度：O(n!)，这个可以从排列的树形图中很明显发现，每一层节点为n，第二层每一个分支都延伸了n-1个分支，再往下又是n-2个分支，所以一直到叶子节点一共就是 n * n-1 * n-2 * ..... 1 = n!。<br>
+空间复杂度：O(n)，和子集问题同理。</p>
+<p><strong>组合问题分析</strong>：</p>
+<p>时间复杂度：O(2^n)，组合问题其实就是一种子集的问题，所以组合问题最坏的情况，也不会超过子集问题的时间复杂度。<br>
+空间复杂度：O(n)，和子集问题同理。</p>
+<p><strong>N皇后问题分析</strong>：</p>
+<p>时间复杂度：O(n!) ，其实如果看树形图的话，直觉上是O(n^n)，但皇后之间不能见面所以在搜索的过程中是有剪枝的，最差也就是O（n!），n!表示n * (n-1) * .... * 1。<br>
+空间复杂度：O(n)，和子集问题同理。</p>
+<p><strong>解数独问题分析</strong>：</p>
+<p>时间复杂度：O(9^m) , m是'.'的数目。
+空间复杂度：O(n ^ 2)，递归的深度是n^2</p>
+<p><img alt="在这里插入图片描述" src="https://img-blog.csdnimg.cn/4f4d79ae8b404c87b6b2700d69617dc6.png" /></p>
 
 
 
