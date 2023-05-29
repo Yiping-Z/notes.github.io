@@ -17,7 +17,7 @@
         <link rel="next" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day28.html">
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.12">
     
     
       
@@ -1032,6 +1032,55 @@ public:
 <p><strong>题目</strong>：在一条环路上有 n 个加油站，其中第 i 个加油站有汽油 gas[i] 升。</p>
 <p>你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。</p>
 <p>给定两个整数数组 gas 和 cost ，如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1 。如果存在解，则 保证 它是 唯一 的。</p>
+<p><strong>思路</strong>：局部最优：当前累加rest[i]的和curSum一旦小于0，起始位置至少要是i+1，因为从i之前开始一定不行。全局最优：找到可以跑一圈的起始位置。</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int canCompleteCircuit(vector&lt;int&gt;&amp; gas, vector&lt;int&gt;&amp; cost) {
+        int curr = 0;
+        int total = 0;
+        int idx = 0;
+        for (int i = 0; i &lt; gas.size(); i++) {
+            curr += gas[i] - cost[i];
+            total += gas[i] - cost[i];
+            if (curr &lt; 0) {
+                idx = i + 1;
+                curr = 0;
+            }
+        }
+        if (total &lt; 0) {
+            return -1;
+        }
+        return idx;
+    }
+};
+</code></pre>
+<p><a href="https://leetcode.cn/problems/candy/">135. 分发糖果</a></p>
+<p><strong>题目</strong>：n 个孩子站成一排。给你一个整数数组 ratings 表示每个孩子的评分。</p>
+<p>你需要按照以下要求，给这些孩子分发糖果：</p>
+<p>每个孩子至少分配到 1 个糖果。
+相邻两个孩子评分更高的孩子会获得更多的糖果。
+请你给每个孩子分发糖果，计算并返回需要准备的 最少糖果数目 。</p>
+<p><strong>思路</strong>：
+一次是从左到右遍历，只比较右边孩子评分比左边大的情况。
+一次是从右到左遍历，只比较左边孩子评分比右边大的情况。</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int candy(vector&lt;int&gt;&amp; ratings) {
+        vector&lt;int&gt;res(ratings.size(), 1);
+        for (int i = 1; i &lt; ratings.size(); i++) {
+            if (ratings[i + 1] &gt; ratings[i]) {
+                res[i + 1] = max(res[i + 1], res[i] + 1);
+            }
+        }
+        for (int i = ratings.size() - 2; i &gt;= 0; i--) {
+            if (ratings[i + 1] &lt; ratings[i]) {
+                res[i] = max(res[i], res[i + 1] + 1);
+            }
+        }
+        return accumulate(res.begin(), res.end(), 0);
+    }
+};
+</code></pre>
 
 
 
@@ -1138,7 +1187,7 @@ public:
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tracking", "navigation.tabs", "navigation.top", "navigation.footer", "navigation.tabs.sticky", "navigation.path"], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="assets/javascripts/bundle.c2be25ad.min.js"></script>
       
     
   </body>
