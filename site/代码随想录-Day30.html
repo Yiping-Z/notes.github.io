@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://yiping-z.github.io/notes/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day30.html">
       
       
-        <link rel="prev" href="2023-05-01-multithreading.html">
+        <link rel="prev" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day31.html">
       
       
         <link rel="next" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day29.html">
@@ -71,6 +71,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#860" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -266,7 +271,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day30.html" class="md-tabs__link md-tabs__link--active">
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day31.html" class="md-tabs__link md-tabs__link--active">
         算法
       </a>
     </li>
@@ -302,7 +307,9 @@
   
 
 
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="index.html" title="Yiping&#39;s Notes" class="md-nav__button md-logo" aria-label="Yiping's Notes" data-md-component="logo">
       
@@ -586,6 +593,20 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day31.html" class="md-nav__link">
+        Day 31 贪心
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -595,9 +616,52 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Day 30 贪心
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day30.html" class="md-nav__link md-nav__link--active">
         Day 30 贪心
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#860" class="md-nav__link">
+    860. 柠檬水找零
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#406" class="md-nav__link">
+    406. 根据身高重建队列
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#452" class="md-nav__link">
+    452. 用最少数量的箭引爆气球
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -986,24 +1050,6 @@
               </div>
             
             
-              
-                
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           
             <div class="md-content" data-md-component="content">
@@ -1017,7 +1063,7 @@
 
   <h1>Day 30 贪心</h1>
 
-<p><a href="https://leetcode.cn/problems/lemonade-change/">860. 柠檬水找零</a></p>
+<h3 id="860"><a href="https://leetcode.cn/problems/lemonade-change/">860. 柠檬水找零</a></h3>
 <p><strong>题目</strong>：在柠檬水摊上，每一杯柠檬水的售价为 5 美元。</p>
 <p>顾客排队购买你的产品，（按账单 bills 支付的顺序）一次购买一杯。</p>
 <p>每位顾客只买一杯柠檬水，然后向你付 5 美元、10 美元或 20 美元。你必须给每个顾客正确找零，也就是说净交易是每位顾客向你支付 5 美元。</p>
@@ -1056,7 +1102,7 @@ public:
     }
 };
 </code></pre>
-<p><a href="https://leetcode.cn/problems/queue-reconstruction-by-height/">406. 根据身高重建队列</a></p>
+<h3 id="406"><a href="https://leetcode.cn/problems/queue-reconstruction-by-height/">406. 根据身高重建队列</a></h3>
 <p><strong>题目</strong>：假设有打乱顺序的一群人站成一个队列，数组 people 表示队列中一些人的属性（不一定按顺序）。每个 people[i] = [hi, ki] 表示第 i 个人的身高为 hi ，前面 正好 有 ki 个身高大于或等于 hi 的人。</p>
 <p>请你重新构造并返回输入数组 people 所表示的队列。返回的队列应该格式化为数组 queue ，其中 queue[j] = [hj, kj] 是队列中第 j 个人的属性（queue[0] 是排在队列前面的人）。</p>
 <p><strong>思路</strong>：从高到低的顺序排，插入ki位，因为后插入的数小，不会影响已经插入的数。List底层实现是Linked List, 插入耗时比vector短。</p>
@@ -1085,7 +1131,7 @@ public:
     }
 };
 </code></pre>
-<p><a href="https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/">452. 用最少数量的箭引爆气球</a></p>
+<h3 id="452"><a href="https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/">452. 用最少数量的箭引爆气球</a></h3>
 <p><strong>题目</strong>：有一些球形气球贴在一堵用 XY 平面表示的墙面上。墙面上的气球记录在整数数组 points ，其中points[i] = [xstart, xend] 表示水平直径在 xstart 和 xend之间的气球。你不知道气球的确切 y 坐标。</p>
 <p>一支弓箭可以沿着 x 轴从不同点 完全垂直 地射出。在坐标 x 处射出一支箭，若有一个气球的直径的开始和结束坐标为 xstart，xend， 且满足  xstart ≤ x ≤ xend，则该气球会被 引爆 。可以射出的弓箭的数量 没有限制 。 弓箭一旦被射出之后，可以无限地前进。</p>
 <p>给你一个数组 points ，返回引爆所有气球所必须射出的 最小 弓箭数 。</p>
@@ -1136,7 +1182,7 @@ public:
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="2023-05-01-multithreading.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: 并发编程 1, 2 (lianglianglee)" rel="prev">
+          <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day31.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Day 31 贪心" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -1145,7 +1191,7 @@ public:
                 Previous
               </span>
               <div class="md-ellipsis">
-                并发编程 1, 2 (lianglianglee)
+                Day 31 贪心
               </div>
             </div>
           </a>
@@ -1209,7 +1255,7 @@ public:
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tracking", "navigation.tabs", "navigation.top", "navigation.footer", "navigation.tabs.sticky", "navigation.path"], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tracking", "navigation.tabs", "navigation.top", "navigation.footer", "navigation.tabs.sticky", "navigation.path", "toc.integrate"], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="assets/javascripts/bundle.b4d07000.min.js"></script>

@@ -7,6 +7,7 @@ theme:
     - navigation.footer
     - navigation.tabs.sticky
     - navigation.path
+    - toc.integrate
   palette: 
     # Palette toggle for light mode
     - scheme: default
@@ -32,6 +33,7 @@ nav:
       - 2023-05-01-multithreading.md
   - 算法: 
     - 代码随想录:
+      - 代码随想录-Day31.md
       - 代码随想录-Day30.md
       - 代码随想录-Day29.md
       - 代码随想录-Day28.md

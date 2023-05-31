@@ -3,7 +3,7 @@ hide:
   - toc
 title: Day 30 贪心
 ---
-[860. 柠檬水找零](https://leetcode.cn/problems/lemonade-change/)
+### [860. 柠檬水找零](https://leetcode.cn/problems/lemonade-change/)
 
 **题目**：在柠檬水摊上，每一杯柠檬水的售价为 5 美元。
 
@@ -50,7 +50,7 @@ public:
 };
 ```
 
-[406. 根据身高重建队列](https://leetcode.cn/problems/queue-reconstruction-by-height/)
+### [406. 根据身高重建队列](https://leetcode.cn/problems/queue-reconstruction-by-height/)
 
 **题目**：假设有打乱顺序的一群人站成一个队列，数组 people 表示队列中一些人的属性（不一定按顺序）。每个 people[i] = [hi, ki] 表示第 i 个人的身高为 hi ，前面 正好 有 ki 个身高大于或等于 hi 的人。
 
@@ -87,7 +87,7 @@ public:
 };
 ```
 
-[452. 用最少数量的箭引爆气球](https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/)
+### [452. 用最少数量的箭引爆气球](https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/)
 
 **题目**：有一些球形气球贴在一堵用 XY 平面表示的墙面上。墙面上的气球记录在整数数组 points ，其中points[i] = [xstart, xend] 表示水平直径在 xstart 和 xend之间的气球。你不知道气球的确切 y 坐标。
 
