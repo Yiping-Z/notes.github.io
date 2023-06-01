@@ -1,7 +1,7 @@
 ---
 hide:
   - toc
-title: Day 32 贪心
+title: Day 32 贪心，动态规划
 ---
 
 ### [738. 单调递增的数字](https://leetcode.cn/problems/monotone-increasing-digits/)
@@ -40,10 +40,10 @@ public:
 
 计算监控树的所有节点所需的最小摄像头数量。
 
-**思路**：局部最优：让叶子节点的父节点安摄像头，所用摄像头最少，整体最优：全部摄像头数量所用最少
+**思路**：局部最优：让叶子节点的父节点安摄像头，所用摄像头最少，整体最优：全部摄像头数量所用最少<br>
 从下往上：后序遍历
 
-节点状态：该节点无覆盖/本节点有摄像头/本节点有覆盖
+节点状态：该节点无覆盖/本节点有摄像头/本节点有覆盖<br>
 空节点的状态只能是有覆盖，这样就可以在叶子节点的父节点放摄像头
 
 ```cpp
@@ -87,3 +87,26 @@ public:
 - dp数组如何初始化
 - 确定遍历顺序
 - 举例推导dp数组
+
+###[746. 使用最小花费爬楼梯](https://leetcode.cn/problems/min-cost-climbing-stairs/)
+
+**题目**：给你一个整数数组 cost ，其中 cost[i] 是从楼梯第 i 个台阶向上爬需要支付的费用。一旦你支付此费用，即可选择向上爬一个或者两个台阶。
+
+你可以选择从下标为 0 或下标为 1 的台阶开始爬楼梯。
+
+请你计算并返回达到楼梯顶部的最低花费。
+
+```cpp
+class Solution {
+public:
+    int minCostClimbingStairs(vector<int>& cost) {
+        vector<int> dp(cost.size() + 1);
+        dp[0] = 0; // 默认第一步都是不花费体力的
+        dp[1] = 0;
+        for (int i = 2; i <= cost.size(); i++) {
+            dp[i] = min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
+        }
+        return dp[cost.size()];
+    }
+};
+```
