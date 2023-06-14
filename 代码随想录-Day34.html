@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://yiping-z.github.io/notes/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day34.html">
       
       
-        <link rel="prev" href="2023-05-01-multithreading.html">
+        <link rel="prev" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day35.html">
       
       
         <link rel="next" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day33.html">
@@ -266,7 +266,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day34.html" class="md-tabs__link md-tabs__link--active">
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day35.html" class="md-tabs__link md-tabs__link--active">
         算法
       </a>
     </li>
@@ -583,6 +583,20 @@
           代码随想录
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day35.html" class="md-nav__link">
+        Day 35 动态规划
+      </a>
+    </li>
+  
+
+            
           
             
               
@@ -1081,6 +1095,95 @@ public:
     }
 };
 </code></pre>
+<p><img alt="在这里插入图片描述" src="https://img-blog.csdnimg.cn/6f55926d33894fe5a28b43f155616f6e.png" />
+<strong>01背包</strong>
+<strong>初始化</strong>: 一定要和dp数组的定义吻合，否则到递推公式的时候就会越来越乱。
+<strong>递推公式</strong>: dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]);
+确定<strong>遍历顺序</strong>
+二维dp遍历的时候，背包容量是从小到大，而一维dp遍历的时候，背包是从大到小。
+倒序遍历是为了保证物品i只被放入一次
+二维dp数组历的时候不用倒序: 因为对于二维dp，dp[i][j]都是通过上一层即dp[i - 1][j]计算而来，本层的dp[i][j]并不会被覆盖
+两个嵌套for循环的顺序，代码中是先遍历物品嵌套遍历背包容量，不可以先遍历背包容量嵌套遍历物品
+如果遍历背包容量放在上一层，那么每个dp[j]就只会放入一个物品
+倒序遍历的原因是，本质上还是一个对二维数组的遍历，并且右下角的值依赖上一层左上角的值，因此需要保证左边的值仍然是上一层的，从右向左覆盖。</p>
+<pre><code class="language-cpp">// weight数组的大小 就是物品个数
+for(int j = 0; j &lt;= bagweight; j++) { // 遍历背包容量
+    for(int i = 1; i &lt; weight.size(); i++) { // 遍历物品
+        if (j &lt; weight[i]) dp[i][j] = dp[i - 1][j];
+        else dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]);
+    }
+}
+
+// 一维滚动数组
+vector&lt;int&gt; dp(bagWeight + 1, 0);
+for(int i = 0; i &lt; weight.size(); i++) { // 遍历物品
+    for(int j = bagWeight; j &gt;= weight[i]; j--) { // 遍历背包容量
+        dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
+    }
+}
+</code></pre>
+<p><a href="https://leetcode.cn/problems/target-sum/">494.目标和</a></p>
+<p><strong>题目</strong>：给定一个非负整数数组，a1, a2, ..., an, 和一个目标数，S。现在你有两个符号 + 和 -。对于数组中的任意一个整数，你都可以从 + 或 -中选择一个符号添加在前面。</p>
+<p>返回可以使最终数组和为目标数 S 的所有添加符号的方法数。</p>
+<p><strong>思路</strong>：
+回溯算法：
+left组合 - right组合 = target。</p>
+<p>left + right = sum，而sum是固定的。right = sum - left</p>
+<p>left - (sum - left) = target 推导出 left = (target + sum)/2 。</p>
+<p>问题就是在集合nums中找出和为left的组合。</p>
+<p>动态规划：
+// 要求背包装满
+dp[j] += dp[j - nums[i]];</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int findTargetSumWays(vector&lt;int&gt;&amp; nums, int target) {
+        int sum = accumulate(nums.begin(), nums.end(), 0);
+        if (abs(target) &gt; sum) {
+            return 0;
+        }
+        if ((sum + target) % 2 != 0) {
+            return 0;
+        }
+        int v = (target + sum) / 2;
+        vector&lt;int&gt;dp(v + 1, 0);
+        dp[0] = 1;
+        for (int i = 0; i &lt; nums.size(); i++) {
+            for (int j = v; j &gt;= nums[i]; j--) {
+                dp[j] += dp[j - nums[i]];
+            }
+        }
+        return dp[v];
+    }
+};
+</code></pre>
+<p><a href="https://leetcode.cn/problems/ones-and-zeroes/">474.一和零</a></p>
+<p><strong>题目</strong>：给你一个二进制字符串数组 strs 和两个整数 m 和 n 。</p>
+<p>请你找出并返回 strs 的最大子集的大小，该子集中 最多 有 m 个 0 和 n 个 1 。</p>
+<p>如果 x 的所有元素也是 y 的元素，集合 x 是集合 y 的 子集 。</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int findMaxForm(vector&lt;string&gt;&amp; strs, int m, int n) {
+        vector&lt;vector&lt;int&gt;&gt;dp(m + 1, vector&lt;int&gt;(n + 1));
+        for (string str: strs) {
+            int cnt0 = 0;
+            int cnt1 = 0;
+            for (auto x: str) {
+                if (x == '1') {
+                    cnt1++;
+                } else {
+                    cnt0++;
+                }
+            }
+            for (int i = m; i &gt;= cnt0; i--) {
+                for (int j = n; j &gt;= cnt1; j--) {
+                    dp[i][j] = max(dp[i][j], dp[i - cnt0][j - cnt1] + 1);
+                }
+            }
+        }
+        return dp[m][n];
+    }
+};
+</code></pre>
 
 
 
@@ -1111,7 +1214,7 @@ public:
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="2023-05-01-multithreading.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: 并发编程 1, 2 (lianglianglee)" rel="prev">
+          <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day35.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Day 35 动态规划" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -1120,7 +1223,7 @@ public:
                 Previous
               </span>
               <div class="md-ellipsis">
-                并发编程 1, 2 (lianglianglee)
+                Day 35 动态规划
               </div>
             </div>
           </a>
