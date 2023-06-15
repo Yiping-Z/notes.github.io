@@ -3,34 +3,46 @@ hide:
   - toc
 title: Day 35 动态规划
 ---
+0-1背包的多种应用，
 
-[1049. 最后一块石头的重量 II](https://leetcode.cn/problems/last-stone-weight-ii/)
+纯 0 - 1 背包 (opens new window)是求 给定背包容量 装满背包 的最大价值是多少。<br>
+416. 分割等和子集 (opens new window)是求 给定背包容量，能不能装满这个背包。<br>
+1049. 最后一块石头的重量 II (opens new window)是求 给定背包容量，尽可能装，最多能装多少<br>
+494. 目标和 (opens new window)是求 给定背包容量，装满背包有多少种方法。<br>
+474 是求 给定背包容量，装满背包最多有多少个物品。
 
-**题目**：有一堆石头，用整数数组 stones 表示。其中 stones[i] 表示第 i 块石头的重量。
+完全背包的物品是可以添加多次的，所以要从小到大去遍历。
+// 先遍历物品，再遍历背包
 
-每一回合，从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x <= y。那么粉碎的可能结果如下：
+```cpp
+for(int i = 0; i < weight.size(); i++) { // 遍历物品
+    for(int j = weight[i]; j <= bagWeight ; j++) { // 遍历背包容量
+        dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
 
-如果 x == y，那么两块石头都会被完全粉碎；
-如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。
-最后，最多只会剩下一块 石头。返回此石头 最小的可能重量 。如果没有石头剩下，就返回 0。
+    }
+}
+```
+###[518.零钱兑换II](https://leetcode.cn/problems/coin-change-ii/)
 
-**思路**：尽量让石头分成重量相同的两堆，相撞之后剩下的石头最小<br>
-dp[j]表示容量（这里说容量更形象，其实就是重量）为j的背包，最多可以背最大重量为dp[j]。<br>
-物品遍历的for循环放在外层，遍历背包的for循环放在内层，且内层for循环倒序遍历
+**题目**：给定不同面额的硬币和一个总金额。写出函数来计算可以凑成总金额的硬币组合数。假设每一种面额的硬币有无限个。
+
+**思路**： 如果求组合数就是外层for循环遍历物品，内层for遍历背包。
+如果求排列数就是外层for遍历背包，内层for循环遍历物品。
 
 ```cpp
 class Solution {
 public:
-    int lastStoneWeightII(vector<int>& stones) {
-        vector<int> dp(15001, 0);
-        int sum = accumulate(stones.begin(), stones.end(), 0);
-        int target = sum / 2;
-        for (int i = 0; i < stones.size(); i++) { // 遍历物品
-            for (int j = target; j >= stones[i]; j--) { // 遍历背包
-                dp[j] = max(dp[j], dp[j - stones[i]] + stones[i]);
+    int change(int amount, vector<int>& coins) {
+        vector<int>dp(amount + 1, 0);
+        dp[0] = 1;
+        for (int j = 0; j < coins.size(); j++) { // 遍历物品 只会出现[1, 5], 不会出现[5, 1]
+            for (int i = 1; i <= amount; i++) { // 遍历背包
+                if (i - coins[j] >= 0) {
+                    dp[i] += dp[i - coins[j]];
+                }
             }
         }
-        return sum - dp[target] - dp[target];
+        return dp[amount];
     }
 };
 ```
