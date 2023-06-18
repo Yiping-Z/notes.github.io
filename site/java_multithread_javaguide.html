@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://yiping-z.github.io/notes/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day28.html">
+        <link rel="canonical" href="https://yiping-z.github.io/notes/java_multithread_javaguide.html">
       
       
-        <link rel="prev" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day29.html">
+        <link rel="prev" href="2023-05-01-spring.html">
       
       
-        <link rel="next" href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day27.html">
+        <link rel="next" href="jvm_javaguide.html">
       
       <link rel="icon" href="images/profile.jpeg">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
     
     
       
-        <title>Day 28 贪心 - Yiping's Notes</title>
+        <title>并发编程 (Java Guide) - Yiping's Notes</title>
       
     
     
@@ -72,6 +72,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -103,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Day 28 贪心
+              并发编程 (Java Guide)
             
           </span>
         </div>
@@ -230,6 +235,8 @@
         
   
   
+    
+  
 
 
   
@@ -241,7 +248,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="java_multithread_javaguide.html" class="md-tabs__link">
+      <a href="java_multithread_javaguide.html" class="md-tabs__link md-tabs__link--active">
         语言
       </a>
     </li>
@@ -253,8 +260,6 @@
         
   
   
-    
-  
 
 
   
@@ -266,7 +271,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day35.html" class="md-tabs__link md-tabs__link--active">
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day35.html" class="md-tabs__link">
         算法
       </a>
     </li>
@@ -475,14 +480,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
       
       
       
@@ -491,7 +498,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           语言
@@ -502,14 +509,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
       
       
       
@@ -518,7 +527,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3_1">
           <span class="md-nav__icon md-icon"></span>
           Java
@@ -529,11 +538,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="java_multithread_javaguide.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="java_multithread_javaguide.html" class="md-nav__link md-nav__link--active">
         并发编程 (Java Guide)
       </a>
+      
     </li>
   
 
@@ -600,16 +619,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
       
       
       
@@ -618,7 +635,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           算法
@@ -629,16 +646,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
       
       
       
@@ -647,7 +662,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_4_1">
           <span class="md-nav__icon md-icon"></span>
           代码随想录
@@ -756,19 +771,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day28.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day28.html" class="md-nav__link">
         Day 28 贪心
       </a>
-      
     </li>
   
 
@@ -1139,73 +1146,8 @@
   
 
 
-  <h1>Day 28 贪心</h1>
-
-<p><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/">122. 买卖股票的最佳时机 II</a></p>
-<p><strong>题目</strong>：给你一个整数数组 prices ，其中 prices[i] 表示某支股票第 i 天的价格。</p>
-<p>在每一天，你可以决定是否购买和/或出售股票。你在任何时候 最多 只能持有 一股 股票。你也可以先购买，然后在 同一天 出售。</p>
-<p>返回 你能获得的 最大 利润 。</p>
-<pre><code class="language-cpp">class Solution {
-public:
-    int maxProfit(vector&lt;int&gt;&amp; prices) {
-        int result = 0;
-        for (int i = 1; i &lt; prices.size(); i++) {
-            // 每天收集正利润
-            result += max(prices[i] - prices[i - 1], 0);
-        }
-        return result;
-    }
-};
-
-// 动态规划
-class Solution {
-public:
-    int maxProfit(vector&lt;int&gt;&amp; prices) {
-        // dp[i][1]第i天持有的最多现金
-        // dp[i][0]第i天持有股票后的最多现金
-        int n = prices.size();
-        vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(2, 0));
-        dp[0][0] -= prices[0]; // 持股票
-        for (int i = 1; i &lt; n; i++) {
-            // 第i天持股票所剩最多现金 = max(第i-1天持股票所剩现金, 第i-1天持现金-买第i天的股票)
-            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] - prices[i]);
-            // 第i天持有最多现金 = max(第i-1天持有的最多现金，第i-1天持有股票的最多现金+第i天卖出股票)
-            dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + prices[i]);
-        }
-        return max(dp[n - 1][0], dp[n - 1][1]);
-    }
-};
-</code></pre>
-<p><a href="https://leetcode.cn/problems/jump-game-ii/">45. 跳跃游戏 II</a></p>
-<p><strong>题目</strong>：给定一个长度为 n 的 0 索引整数数组 nums。初始位置为 nums[0]。</p>
-<p>每个元素 nums[i] 表示从索引 i 向前跳转的最大长度。换句话说，如果你在 nums[i] 处，你可以跳转到任意 nums[i + j] 处:</p>
-<p>0 &lt;= j &lt;= nums[i] 
-i + j &lt; n
-返回到达 nums[n - 1] 的最小跳跃次数。生成的测试用例可以到达 nums[n - 1]。</p>
-<pre><code class="language-cpp">class Solution {
-public:
-    int jump(vector&lt;int&gt;&amp; nums) {
-        if (nums.size() == 1) {
-            return 0;
-        }
-        int curD = 0;
-        int nextD = 0;
-        int ans = 0;
-        for (int i = 0; i &lt; nums.size(); i++) {
-            nextD = max(nextD, nums[i] + i);
-            //  已经到达当前可以走的最大值
-            if (i == curD) {
-                ans++;
-                curD = nextD;
-                if (nextD &gt;= nums.size() - 1) {
-                    return ans;
-                }
-            }
-        }
-        return ans;
-    }
-};
-</code></pre>
+<h1 id="_1">何为进程?</h1>
+<p>进程是程序的一次执行过程，是系统运行程序的基本单位，因此进程是动态的。系统运行一个程序即是一个进程从创建，运行到消亡的过程。在 Java 中，当我们启动 main 函数时其实就是启动了一个 JVM 的进程，而 main 函数所在的线程就是这个进程中的一个线程，也称主线程。</p>
 
 
 
@@ -1236,7 +1178,7 @@ public:
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day29.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Day 29 贪心" rel="prev">
+          <a href="2023-05-01-spring.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Spring5 框架, 要点, IOC (pdai)" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -1245,20 +1187,20 @@ public:
                 Previous
               </span>
               <div class="md-ellipsis">
-                Day 29 贪心
+                Spring5 框架, 要点, IOC (pdai)
               </div>
             </div>
           </a>
         
         
           
-          <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day27.html" class="md-footer__link md-footer__link--next" aria-label="Next: Day 27 贪心" rel="next">
+          <a href="jvm_javaguide.html" class="md-footer__link md-footer__link--next" aria-label="Next: JVM (Java Guide)" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Day 27 贪心
+                JVM (Java Guide)
               </div>
             </div>
             <div class="md-footer__button md-icon">

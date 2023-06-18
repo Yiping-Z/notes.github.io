@@ -32,10 +32,12 @@ nav:
       - 2023-05-01-spring.md
 
   - 语言:
-    - Java多线程: 
-      - 2023-05-01-multithreading.md
-    - Java基础:
+    - Java: 
+      - java_multithread_javaguide.md
+      - jvm_javaguide.md
       - java_javaguide.md
+      - 2023-05-01-multithreading.md
+      
   - 算法: 
     - 代码随想录:
       - 代码随想录-Day35.md
