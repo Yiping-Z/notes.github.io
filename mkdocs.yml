@@ -27,6 +27,7 @@ nav:
   - 框架:
     - Spring: 
       - spring_javaguide.md
+      - spring&springboot_annotation_javaguide.md
       - 2023-05-07-spring.md
       - 2023-05-01-spring.md
 
