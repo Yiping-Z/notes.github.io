@@ -30,6 +30,8 @@ nav:
       - spring&springboot_annotation_javaguide.md
       - 2023-05-07-spring.md
       - 2023-05-01-spring.md
+    - MySQL:
+      - mysql_xiaolin.md
 
   - 语言:
     - Java: 
