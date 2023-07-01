@@ -8,16 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://yiping-z.github.io/notes/multithreading1.html">
+        <link rel="canonical" href="https://yiping-z.github.io/notes/mysql_xiaolin.html">
       
       
+        <link rel="prev" href="2023-05-01-spring.html">
+      
+      
+        <link rel="next" href="java_multithread_javaguide.html">
       
       <link rel="icon" href="images/profile.jpeg">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
     
     
       
-        <title>并发编程 1, 2 (lianglianglee) - Yiping's Notes</title>
+        <title>MySQL (xiaolin) - Yiping's Notes</title>
       
     
     
@@ -99,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              并发编程 1, 2 (lianglianglee)
+              MySQL (xiaolin)
             
           </span>
         </div>
@@ -203,6 +207,8 @@
         
   
   
+    
+  
 
 
   
@@ -214,7 +220,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="spring_javaguide.html" class="md-tabs__link">
+      <a href="spring_javaguide.html" class="md-tabs__link md-tabs__link--active">
         框架
       </a>
     </li>
@@ -344,14 +350,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
@@ -360,7 +368,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           框架
@@ -461,14 +469,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
       
       
       
@@ -477,7 +487,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2_2">
           <span class="md-nav__icon md-icon"></span>
           MySQL
@@ -488,11 +498,19 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="mysql_xiaolin.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="mysql_xiaolin.html" class="md-nav__link md-nav__link--active">
         MySQL (xiaolin)
       </a>
+      
     </li>
   
 
@@ -1169,22 +1187,21 @@
   
 
 
-  <h1>并发编程 1, 2 (lianglianglee)</h1>
+  <h1>MySQL (xiaolin)</h1>
 
-<p>创建线程方法</p>
-<pre><code class="language-java">public class RunnableThread implements Runnable {
-public class ExtendsThread extends Thread {
-</code></pre>
-<p>Callable, 线程池</p>
-<p>实现 Runnable 接口比继承 Thread 类实现线程要好
-1. 实现了 Runnable 与 Thread 类的解耦，Runnable 里只有一个 run() 方法，它定义了需要执行的内容，Thread 类负责线程启动和属性设置等内容。
-2. 使用继承 Thread 类方式，每次执行一次任务，都需要新建一个独立的线程，执行完任务后线程走到生命周期的尽头被销毁，如果还想执行这个任务，就必须再新建一个继承了 Thread 类的类。
-使用实现 Runnable 接口的方式，就可以把任务直接传入线程池，使用一些固定的线程来完成任务，不需要每次新建销毁线程，大大降低了性能开销
-3. Java 语言不支持双继承，如果我们的类一旦继承了 Thread 类，那么它后续就没有办法再继承其他的类，限制可拓展性</p>
-<p>用 interrupt停止线程：请求中断，而不是强制停止，因为这样可以避免数据错乱，也可以让线程有时间结束收尾工作。
-Thread.currentThread().isInterrupted()
-如果 sleep、wait 等可以让线程进入阻塞的方法使线程休眠了，而处于休眠中的线程被中断，那么线程是可以感受到中断信号的，并且会抛出一个 InterruptedException 异常，同时清除中断信号，将中断标记位设置成 false。</p>
-<p>已经被舍弃的 stop()、suspend() 和 resume()，它们由于有很大的安全风险比如死锁风险而被舍弃，而 volatile 这种方法在某些特殊的情况下，比如线程被长时间阻塞的情况，就无法及时感受中断，所以 volatile 是不够全面的停止线程的方法。</p>
+<p>唯一索引等值查询：</p>
+<ul>
+<li>当查询的记录是「存在」的，在索引树上定位到这一条记录后，将该记录的索引中的 next-key lock 会退化成「记录锁」。</li>
+<li>当查询的记录是「不存在」的，在索引树找到第一条大于该查询记录的记录后，将该记录的索引中的 next-key lock 会退化成「间隙锁」。</li>
+</ul>
+<p>非唯一索引等值查询：</p>
+<ul>
+<li>当查询的记录「存在」时，由于不是唯一索引，所以肯定存在索引值相同的记录，于是非唯一索引等值查询的过程是一个扫描的过程，直到扫描到第一个不符合条件的二级索引记录就停止扫描，然后在扫描的过程中，对扫描到的二级索引记录加的是 next-key 锁，而对于第一个不符合条件的二级索引记录，该二级索引的 next-key 锁会退化成间隙锁。同时，在符合查询条件的记录的主键索引上加记录锁。</li>
+<li>当查询的记录「不存在」时，扫描到第一条不符合条件的二级索引记录，该二级索引的 next-key 锁会退化成间隙锁。因为不存在满足查询条件的记录，所以不会对主键索引加锁。
+非唯一索引和主键索引的范围查询的加锁规则不同之处在于：</li>
+</ul>
+<p>唯一索引在满足一些条件的时候，索引的 next-key lock 退化为间隙锁或者记录锁。
+非唯一索引范围查询，索引的 next-key lock 不会退化为间隙锁和记录锁。</p>
 
 
 
@@ -1208,6 +1225,44 @@ Thread.currentThread().isInterrupted()
       
         <footer class="md-footer">
   
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="2023-05-01-spring.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Spring5 框架, 要点, IOC (pdai)" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Spring5 框架, 要点, IOC (pdai)
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="java_multithread_javaguide.html" class="md-footer__link md-footer__link--next" aria-label="Next: 并发编程 (Java Guide)" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                并发编程 (Java Guide)
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
