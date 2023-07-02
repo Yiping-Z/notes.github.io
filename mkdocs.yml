@@ -9,17 +9,36 @@ theme:
     - navigation.tabs.sticky
     - navigation.path
     - toc.integrate
-  palette: 
+  #palette: 
+    # primary: white
     # Palette toggle for light mode
-    - scheme: default
+    # - scheme: default
+    #   toggle:
+    #     icon: material/brightness-7 
+    #     name: Switch to dark mode
+
+    # # Palette toggle for dark mode
+    # - scheme: slate
+    #   toggle:
+    #     icon: material/brightness-4
+    #     name: Switch to light mode
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: red
       toggle:
-        icon: material/brightness-7 
+        icon: material/weather-sunny
         name: Switch to dark mode
 
     # Palette toggle for dark mode
-    - scheme: slate
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
       toggle:
-        icon: material/brightness-4
+        icon: material/weather-night
         name: Switch to light mode
   
 nav:
