@@ -1,6 +1,6 @@
 ---
 layout: 
-title: MySQL (xiaolin)
+title: MySQL (小林Coding)
 description: 
 image: 
 hide:
