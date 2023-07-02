@@ -21,7 +21,7 @@
     
     
       
-        <title>MySQL (小林Coding) - Yiping's Notes</title>
+        <title>MySQL (小林coding) - Yiping's Notes</title>
       
     
     
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              MySQL (小林Coding)
+              MySQL (小林coding)
             
           </span>
         </div>
@@ -515,7 +515,7 @@
       
       
       <a href="mysql_xiaolin.html" class="md-nav__link md-nav__link--active">
-        MySQL (小林Coding)
+        MySQL (小林coding)
       </a>
       
     </li>
@@ -1239,7 +1239,36 @@
 <img alt="两阶段提交" src="images/%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4.png" />
 prepare 阶段：将 XID（内部 XA 事务的 ID） 写入到 redo log，同时将 redo log 对应的事务状态设置为 prepare，然后将 redo log 持久化到磁盘（innodb_flush_log_at_trx_commit = 1 的作用）；</p>
 <p>commit 阶段：把 XID 写入到 binlog，然后将 binlog 持久化到磁盘（sync_binlog = 1 的作用），接着调用引擎的提交事务接口，将 redo log 状态设置为 commit，此时该状态并不需要持久化到磁盘，只需要 write 到文件系统的 page cache 中就够了，因为只要 binlog 写磁盘成功，就算 redo log 的状态还是 prepare 也没有关系，一样会被认为事务已经执行成功；</p>
-<h1 id="_4"></h1>
+<p>具体更新一条记录 UPDATE t_user SET name = 'xiaolin' WHERE id = 1; 的流程如下:</p>
+<ul>
+<li>执行器负责具体执行，会调用存储引擎的接口，通过主键索引树搜索获取 id = 1 这一行记录：<ul>
+<li>如果 id=1 这一行所在的数据页本来就在 buffer pool 中，就直接返回给执行器更新；</li>
+<li>如果记录不在 buffer pool，将数据页从磁盘读入到 buffer pool，返回记录给执行器。</li>
+</ul>
+</li>
+<li>执行器得到聚簇索引记录后，会看一下更新前的记录和更新后的记录是否一样：<ul>
+<li>如果一样的话就不进行后续更新流程；</li>
+<li>如果不一样的话就把更新前的记录和更新后的记录都当作参数传给 InnoDB 层，让 InnoDB 真正的执行更新记录的操作；</li>
+</ul>
+</li>
+<li>开启事务， InnoDB 层更新记录前，首先要记录相应的 undo log，因为这是更新操作，需要把被更新的列的旧值记下来，也就是要生成一条 undo log，undo log 会写入 Buffer Pool 中的 Undo 页面，不过在内存修改该 Undo 页面后，需要记录对应的 redo log。</li>
+<li>InnoDB 层开始更新记录，会先更新内存（同时标记为脏页），然后将记录写到 redo log 里面，这个时候更新就算完成了。为了减少磁盘I/O，不会立即将脏页写入磁盘，后续由后台线程选择一个合适的时机将脏页写入到磁盘。这就是 WAL 技术，MySQL 的写操作并不是立刻写到磁盘上，而是先写 redo 日志，然后在合适的时间再将修改的行数据写到磁盘上。</li>
+<li>至此，一条记录更新完了。</li>
+<li>在一条更新语句执行完成后，然后开始记录该语句对应的 binlog，此时记录的 binlog 会被保存到 binlog cache，并没有刷新到硬盘上的 binlog 文件，在事务提交时才会统一将该事务运行过程中的所有 binlog 刷新到硬盘。</li>
+<li>事务提交（为了方便说明，这里不说组提交的过程，只说两阶段提交）：<ul>
+<li>prepare 阶段：将 redo log 对应的事务状态设置为 prepare，然后将 redo log 刷新到硬盘；</li>
+<li>commit 阶段：将 binlog 刷新到磁盘，接着调用引擎的提交事务接口，将 redo log 状态设置为 commit（将事务设置为 commit 状态后，刷入到磁盘 redo log 文件）；
+至此，一条更新语句执行完成</li>
+</ul>
+</li>
+</ul>
+<h1 id="_4">索引</h1>
+<ul>
+<li>按「数据结构」分类：B+tree索引、Hash索引、Full-text索引。</li>
+<li>按「物理存储」分类：聚簇索引（主键索引）、二级索引（辅助索引）。</li>
+<li>按「字段特性」分类：主键索引、唯一索引、普通索引、前缀索引。</li>
+<li>按「字段个数」分类：单列索引、联合索引。</li>
+</ul>
 
 
 
