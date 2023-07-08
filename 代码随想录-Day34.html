@@ -73,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1049-ii" class="md-skip">
+        <a href="#01" class="md-skip">
           Skip to content
         </a>
       
@@ -771,6 +771,20 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#01" class="md-nav__link">
+    01背包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    完全背包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#1049-ii" class="md-nav__link">
     1049. 最后一块石头的重量 II
   </a>
@@ -1251,33 +1265,15 @@
 
   <h1>Day 34 动态规划</h1>
 
-<h3 id="1049-ii"><a href="https://leetcode.cn/problems/last-stone-weight-ii/">1049. 最后一块石头的重量 II</a></h3>
-<p><strong>题目</strong>：有一堆石头，用整数数组 stones 表示。其中 stones[i] 表示第 i 块石头的重量。</p>
-<p>每一回合，从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x &lt;= y。那么粉碎的可能结果如下：</p>
-<p>如果 x == y，那么两块石头都会被完全粉碎；
-如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。
-最后，最多只会剩下一块 石头。返回此石头 最小的可能重量 。如果没有石头剩下，就返回 0。</p>
-<p><strong>思路</strong>：尽量让石头分成重量相同的两堆，相撞之后剩下的石头最小<br>
-dp[j]表示容量（这里说容量更形象，其实就是重量）为j的背包，最多可以背最大重量为dp[j]。<br>
-物品遍历的for循环放在外层，遍历背包的for循环放在内层，且内层for循环倒序遍历</p>
-<pre><code class="language-cpp">class Solution {
-public:
-    int lastStoneWeightII(vector&lt;int&gt;&amp; stones) {
-        vector&lt;int&gt; dp(15001, 0);
-        int sum = accumulate(stones.begin(), stones.end(), 0);
-        int target = sum / 2;
-        for (int i = 0; i &lt; stones.size(); i++) { // 遍历物品
-            for (int j = target; j &gt;= stones[i]; j--) { // 遍历背包
-                dp[j] = max(dp[j], dp[j - stones[i]] + stones[i]);
-            }
-        }
-        return sum - dp[target] - dp[target];
-    }
-};
-</code></pre>
+<h3 id="01">01背包</h3>
 <p><img alt="在这里插入图片描述" src="https://img-blog.csdnimg.cn/6f55926d33894fe5a28b43f155616f6e.png" /></p>
-<p><strong>01背包</strong>
-<strong>初始化</strong>: 一定要和dp数组的定义吻合，否则到递推公式的时候就会越来越乱。</p>
+<p><strong>初始化</strong>: 一定要和dp数组的定义吻合，否则到递推公式的时候就会越来越乱。</p>
+<pre><code class="language-cpp">// 初始化 dp
+vector&lt;vector&lt;int&gt;&gt; dp(weight.size(), vector&lt;int&gt;(bagweight + 1, 0));
+for (int j = weight[0]; j &lt;= bagweight; j++) {
+    dp[0][j] = value[0];
+}
+</code></pre>
 <p><strong>递推公式</strong>: dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]);</p>
 <p>确定<strong>遍历顺序</strong></p>
 <p>二维dp遍历的时候，背包容量是从小到大，而一维dp遍历的时候，背包是从大到小。
@@ -1301,6 +1297,58 @@ for(int i = 0; i &lt; weight.size(); i++) { // 遍历物品
         dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
     }
 }
+</code></pre>
+<p>在求装满背包有几种方法的情况下，递推公式一般为：</p>
+<pre><code class="language-cpp">dp[j] += dp[j - nums[i]];
+</code></pre>
+<h3 id="_1">完全背包</h3>
+<p>完全背包的物品是可以添加多次的 <br>
+对于纯完全背包问题，其for循环的先后循环是可以颠倒的</p>
+<pre><code class="language-cpp">// 先遍历物品，再遍历背包
+for(int i = 0; i &lt; weight.size(); i++) { // 遍历物品
+    for(int j = weight[i]; j &lt;= bagWeight ; j++) { // 遍历背包容量
+        dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
+
+    }
+}
+
+// 组合数
+for (int i = 0; i &lt; coins.size(); i++) { // 遍历物品
+    for (int j = coins[i]; j &lt;= amount; j++) { // 遍历背包容量
+        dp[j] += dp[j - coins[i]];
+    }
+}
+
+// 排列数， [1, 5], [5, 1]是两组数
+for (int j = 0; j &lt;= amount; j++) { // 遍历背包容量
+    for (int i = 0; i &lt; coins.size(); i++) { // 遍历物品
+        if (j - coins[i] &gt;= 0) dp[j] += dp[j - coins[i]];
+    }
+}
+</code></pre>
+<h3 id="1049-ii"><a href="https://leetcode.cn/problems/last-stone-weight-ii/">1049. 最后一块石头的重量 II</a></h3>
+<p><strong>题目</strong>：有一堆石头，用整数数组 stones 表示。其中 stones[i] 表示第 i 块石头的重量。</p>
+<p>每一回合，从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x &lt;= y。那么粉碎的可能结果如下：</p>
+<p>如果 x == y，那么两块石头都会被完全粉碎；
+如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。
+最后，最多只会剩下一块 石头。返回此石头 最小的可能重量 。如果没有石头剩下，就返回 0。</p>
+<p><strong>思路</strong>：尽量让石头分成重量相同的两堆，相撞之后剩下的石头最小<br>
+dp[j]表示容量（这里说容量更形象，其实就是重量）为j的背包，最多可以背最大重量为dp[j]。<br>
+物品遍历的for循环放在外层，遍历背包的for循环放在内层，且内层for循环倒序遍历</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int lastStoneWeightII(vector&lt;int&gt;&amp; stones) {
+        vector&lt;int&gt; dp(15001, 0);
+        int sum = accumulate(stones.begin(), stones.end(), 0);
+        int target = sum / 2;
+        for (int i = 0; i &lt; stones.size(); i++) { // 遍历物品
+            for (int j = target; j &gt;= stones[i]; j--) { // 遍历背包
+                dp[j] = max(dp[j], dp[j - stones[i]] + stones[i]);
+            }
+        }
+        return sum - dp[target] - dp[target];
+    }
+};
 </code></pre>
 <h3 id="494"><a href="https://leetcode.cn/problems/target-sum/">494.目标和</a></h3>
 <p><strong>题目</strong>：给定一个非负整数数组，a1, a2, ..., an, 和一个目标数，S。现在你有两个符号 + 和 -。对于数组中的任意一个整数，你都可以从 + 或 -中选择一个符号添加在前面。</p>
