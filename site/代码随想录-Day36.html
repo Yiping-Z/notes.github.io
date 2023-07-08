@@ -72,6 +72,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#96" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -715,9 +720,45 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Day 36 动态规划
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95-Day36.html" class="md-nav__link md-nav__link--active">
         Day 36 动态规划
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#96" class="md-nav__link">
+    96. 不同的二叉搜索树
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#416" class="md-nav__link">
+    416. 分割等和子集
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1203,7 +1244,7 @@
 
   <h1>Day 36 动态规划</h1>
 
-<p><a href="https://leetcode.cn/problems/unique-binary-search-trees/">96. 不同的二叉搜索树</a></p>
+<h3 id="96"><a href="https://leetcode.cn/problems/unique-binary-search-trees/">96. 不同的二叉搜索树</a></h3>
 <p><strong>题目</strong>：给你一个整数 n ，求恰由 n 个节点组成且节点值从 1 到 n 互不相同的 二叉搜索树 有多少种？返回满足题意的二叉搜索树的种数。</p>
 <p><strong>思路</strong>：dp[i] += dp[以j为头结点左子树节点数量] * dp[以j为头结点右子树节点数量]</p>
 <pre><code class="language-cpp">class Solution {
@@ -1217,6 +1258,28 @@ public:
             } 
         }
         return dp[n];
+    }
+};
+</code></pre>
+<h3 id="416"><a href="https://leetcode.cn/problems/partition-equal-subset-sum/">416. 分割等和子集</a></h3>
+<p><strong>题目</strong>： 给你一个 只包含正整数 的 非空 数组 nums 。请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。</p>
+<p><strong>思路</strong>： 01背包，先遍历物品再遍历背包容量。</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    bool canPartition(vector&lt;int&gt;&amp; nums) {
+        int sum = accumulate(nums.begin(), nums.end(), 0);
+        if (sum % 2 != 0) {
+            return false;
+        }
+        sum /= 2;
+        vector&lt;bool&gt;dp(sum + 1, false);
+        dp[0] = true;
+        for (int i = 0; i &lt; nums.size(); i++) {
+            for (int j = sum; j &gt;= nums[i]; j--) {
+                dp[j] = dp[j] || dp[j - nums[i]];
+            }
+        }
+        return dp[sum];
     }
 };
 </code></pre>
