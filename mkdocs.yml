@@ -25,6 +25,8 @@ theme:
 nav:
   - Home: index.md
   - 框架:
+    - Kubernetes:
+      - k8s.md
     - Spring: 
       - spring_javaguide.md
       - spring&springboot_annotation_javaguide.md
@@ -34,6 +36,8 @@ nav:
       - mysql_xiaolin.md
 
   - 语言:
+    - Go:
+      - go.md
     - Java: 
       - java_multithread_javaguide.md
       - jvm_javaguide.md
@@ -42,6 +46,7 @@ nav:
       
   - 算法: 
     - 代码随想录:
+      - 代码随想录-Day37.md
       - 代码随想录-Day36.md
       - 代码随想录-Day35.md
       - 代码随想录-Day34.md

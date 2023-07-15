@@ -3,6 +3,13 @@ hide:
   - toc
 title: Day 34 动态规划
 ---
+
+- 确定dp数组（dp table）以及下标的含义
+- 确定递推公式
+- dp数组如何初始化
+- 确定遍历顺序
+- 举例推导dp数组
+
 ### 01背包
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/6f55926d33894fe5a28b43f155616f6e.png)
@@ -81,6 +88,40 @@ for (int j = 0; j <= amount; j++) { // 遍历背包容量
     for (int i = 0; i < coins.size(); i++) { // 遍历物品
         if (j - coins[i] >= 0) dp[j] += dp[j - coins[i]];
     }
+}
+```
+### 多重背包
+
+每件物品最多有Mi件可用，把Mi件摊开，其实就是一个01背包问题
+```cpp
+void test_multi_pack() {
+    vector<int> weight = {1, 3, 4};
+    vector<int> value = {15, 20, 30};
+    vector<int> nums = {2, 3, 2};
+    int bagWeight = 10;
+    for (int i = 0; i < nums.size(); i++) {
+        while (nums[i] > 1) { // nums[i]保留到1，把其他物品都展开
+            weight.push_back(weight[i]);
+            value.push_back(value[i]);
+            nums[i]--;
+        }
+    }
+
+    vector<int> dp(bagWeight + 1, 0);
+    for(int i = 0; i < weight.size(); i++) { // 遍历物品
+        for(int j = bagWeight; j >= weight[i]; j--) { // 遍历背包容量
+            dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
+        }
+        for (int j = 0; j <= bagWeight; j++) {
+            cout << dp[j] << " ";
+        }
+        cout << endl;
+    }
+    cout << dp[bagWeight] << endl;
+
+}
+int main() {
+    test_multi_pack();
 }
 ```
 
