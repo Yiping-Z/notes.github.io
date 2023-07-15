@@ -13,6 +13,8 @@ hide:
 
 在代码中引用包内的成员时，使用包名而不是目录名。
 
+项目在引用包的时候，会首先在GOROOT/src中寻找，例如fmt输入输出包，当无法找到的时候，会寻找PROJECT GOPATH/src,如果还是无法找到，将会寻找GLOBAL GOPATH/src。
+
 ```go
 // 初始化
 var c, d float64
@@ -101,6 +103,14 @@ go c()
 2.线程安全，多个goroutine同时访问，不需要加锁；
 
 3.channel是有类型的，一个整数的channel只能存放整数。
+
+消息的传递和获取必须成对出现，传数据用channel <- data，取数据用<- channel
+
+使用range关键字，使用在channel上时，会自动等待channel的动作一直到channel被关闭。
+
+select中会有case代码块，用于发送或接收数据。
+
+用在有多个信道的情况
 
 ```go
 var ch0 chan int
@@ -213,5 +223,42 @@ func main() {
       return
    }
 }
+
+// 结构体
+type 结构体名 struct {
+    字段1 类型
+    字段2 类型
+}
+
+// 第一种： 返回该实例的结构类型
+var s T
+s.a = 1
+s.b = 2
+
+// 第二种：返回指针
+ming := new(people)
+ming.name = "xiao ming"
+ming.age = 18
+
+// 第三种：返回指针
+ming := &people{"xiao ming", 18}
+
+// 第二种，第三种声明形式
+(*ming).name = "xiao wang"
+
+// 方法
+func (v Vertex) Abs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
 ```
 
+只有指针接收者类型的方法，才能修改这个接收器的成员值，非指针接收者，方法修改的只是这个传入的指针接收者的一个拷贝。
+
+```go
+// slice
+var arr = [...]int{1,2,3,4}
+fmt.Println(arr) //[1,2,3,4]
+slice := arr[:]
+fmt.Println(slice) //[1,2,3,4]
+slice = append(slice,[]int{5,6,7}...) //此时slice的引用地址已经发生改变了,它引用的底层数组再也不是arr了,而是一个新的数组newarr[1,2,3,4,5,6,7]
+```
