@@ -91,6 +91,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://yiping-z.github.io/notes/psychology_the_brain.html</loc>
+         <lastmod>2023-07-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://yiping-z.github.io/notes/spring%26springboot_annotation_javaguide.html</loc>
          <lastmod>2023-07-16</lastmod>
          <changefreq>daily</changefreq>
