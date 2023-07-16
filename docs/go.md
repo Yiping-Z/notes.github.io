@@ -261,4 +261,37 @@ fmt.Println(arr) //[1,2,3,4]
 slice := arr[:]
 fmt.Println(slice) //[1,2,3,4]
 slice = append(slice,[]int{5,6,7}...) //此时slice的引用地址已经发生改变了,它引用的底层数组再也不是arr了,而是一个新的数组newarr[1,2,3,4,5,6,7]
+
+// 数组初始化
+arr := [10]int{} 或 var arr [10]int
 ```
+
+Go 语言中的数组是值类型，一个数组变量就表示着整个数组，意味着 Go 语言的数组在传递的时候，传递的是原数组的拷贝
+
+```go
+s := []int{1, 2, 3} 简短的赋值语句 
+var s []int var 申明 
+make([]int, 3, 8) 或 make([]int, 3) make 内置方法创建 
+s := ss[:5] 从切片或者数组创建
+
+// 创建
+// map[KeyType]ValueType
+var m map[int]int
+m := make(map[int]int)
+m := map[int]int{
+1: 1,
+2: 2,
+}
+// 读取
+i := m[1]
+v, ok := m[1]
+​
+// 遍历
+for key, value := range m {
+println("Key: ", key, "Value: ", value)
+}
+​
+// 删除
+delete(m, 1)
+```
+

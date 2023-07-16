@@ -2,17 +2,20 @@
 hide:
   - toc
 ---
-This page will include my study notes for Language/Framwork/Algos.
+This page will include my study notes for Framworks/Languages/Algorithms/Online Courses/Readings.
 
-## Framework
+## Frameworks
 - Kubernetes
 - Spring
 - Springboot
 - SQL
 - Redis
 
-## Language
+## Languages
 - Go
 - Java
 
 ## Algorithms
+
+## Online Courses / Readings
+- Psychology

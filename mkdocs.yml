@@ -40,9 +40,9 @@ nav:
       - go.md
     - Java: 
       - java_multithread_javaguide.md
-      - jvm_javaguide.md
+      - java_jvm_javaguide.md
       - java_javaguide.md
-      - 2023-05-01-multithreading.md
+      - java_multithreading_lianglianglee.md
       
   - 算法: 
     - 代码随想录:
@@ -79,6 +79,12 @@ nav:
       - 训练营-Day3.md
       - 训练营-Day2.md
       - 2023-05-15-训练营-Day1.md
+  - Online Courses/Readings:
+    - Psychology:
+      - Introduction to Psychology (Yale):
+        - psychology_history_of_psychology.md
+        - psychology_research_design.md
+
 site_name: Yiping's Notes
 repo_url: https://github.com/Yiping-Z/notes
 site_url: https://yiping-z.github.io/notes/
