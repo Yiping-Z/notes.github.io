@@ -29,6 +29,7 @@ Freud's stages of personality development associated with erogenous zones:
 
 Fixation: an attempt to achieve pleasure as an adult in ways that are equivalent to how it was achieved in these stages
 
-Oedipus Complex
+Oedipus Complex: a desire for sexual involvement with the parent of the opposite sex and a concomitant sense of rivalry with the parent of the same sex
 
-
+Defense Mechanism
+Displacement: redirect energy and focus to more appropriate targets
