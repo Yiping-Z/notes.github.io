@@ -37,7 +37,8 @@ nav:
 
   - 语言:
     - Go:
-      - go.md
+      - go_syntax.md
+      - go_data_structures.md
     - Java: 
       - java_multithread_javaguide.md
       - java_jvm_javaguide.md
