@@ -14,7 +14,7 @@
         <link rel="prev" href="go_syntax.html">
       
       
-        <link rel="next" href="java_multithread_javaguide.html">
+        <link rel="next" href="go_multithreading.html">
       
       <link rel="icon" href="images/profile.jpeg">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
@@ -734,6 +734,20 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="go_multithreading.html" class="md-nav__link">
+        Go 并发编程
+      </a>
     </li>
   
 
@@ -1629,14 +1643,6 @@ func main() {
  misses int
 }
 </code></pre>
-<p>goroutine 以非阻塞的方式执行，它们会随着程序(主线程)的结束而消亡<br>
-WaitGroup: 等待单个或多个goroutines执行结束</p>
-<ul>
-<li>创建一个 WaitGroup 实例，比如名称为：wg</li>
-<li>调用 wg.Add(n)，其中 n 是等待的 goroutine 的数量</li>
-<li>在每个 goroutine 运行的函数中执行 defer wg.Done()</li>
-<li>调用 wg.Wait() 阻塞主逻辑</li>
-</ul>
 
 
 
@@ -1683,13 +1689,13 @@ WaitGroup: 等待单个或多个goroutines执行结束</p>
         
         
           
-          <a href="java_multithread_javaguide.html" class="md-footer__link md-footer__link--next" aria-label="Next: 并发编程 (Java Guide)" rel="next">
+          <a href="go_multithreading.html" class="md-footer__link md-footer__link--next" aria-label="Next: Go 并发编程" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                并发编程 (Java Guide)
+                Go 并发编程
               </div>
             </div>
             <div class="md-footer__button md-icon">
