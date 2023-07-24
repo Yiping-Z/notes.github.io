@@ -39,6 +39,7 @@ nav:
     - Go:
       - go_syntax.md
       - go_data_structures.md
+      - go_multithreading.md
     - Java: 
       - java_multithread_javaguide.md
       - java_jvm_javaguide.md

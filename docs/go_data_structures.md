@@ -78,10 +78,3 @@ type Map struct {
  misses int
 }
 ```
-goroutine 以非阻塞的方式执行，它们会随着程序(主线程)的结束而消亡<br>
-WaitGroup: 等待单个或多个goroutines执行结束
-
-- 创建一个 WaitGroup 实例，比如名称为：wg
-- 调用 wg.Add(n)，其中 n 是等待的 goroutine 的数量
-- 在每个 goroutine 运行的函数中执行 defer wg.Done()
-- 调用 wg.Wait() 阻塞主逻辑
