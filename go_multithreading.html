@@ -1600,7 +1600,15 @@ runtime.GOMAXPROCS(runtime.NumCPU())</p>
 <li>P 表示处理器 Processor，它可以被看做运行在线程上的本地调度器；</li>
 </ul>
 <h3 id="context">Context</h3>
-<p>err, deadline, value</p>
+<ul>
+<li>done (returns a channel that acts as a cancellation signal to functions running on behalf of the Context)</li>
+<li>err (inidicate why the Context was canceled)</li>
+<li>deadline (allows functions to determien whether they should start work at all)</li>
+<li>value (request-scoped data)</li>
+</ul>
+<p><b>Derived context</b><br>
+The context package provides functions to derive new Context values from existing one <br>
+Background is the root of any Context tree; it is never canceled</p>
 
 
 
