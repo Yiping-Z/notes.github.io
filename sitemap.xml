@@ -81,7 +81,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yiping-z.github.io/notes/k8s.html</loc>
+         <loc>https://yiping-z.github.io/notes/k8s_techworldwithnana.html</loc>
+         <lastmod>2023-12-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://yiping-z.github.io/notes/k8s_up%26running.html</loc>
          <lastmod>2023-12-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
