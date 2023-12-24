@@ -26,7 +26,8 @@ nav:
   - Home: index.md
   - 框架:
     - Kubernetes:
-      - k8s.md
+      - k8s_techworldwithnana.md
+      - k8s_up&running.md
     - Spring: 
       - spring_javaguide.md
       - spring&springboot_annotation_javaguide.md

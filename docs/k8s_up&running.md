@@ -1,12 +1,11 @@
 ---
 layout: 
-title: Kubernetes 入门
+title: Kubernetes Up & Running
 description: 
 image: 
 hide:
     -toc
 ---
-
 self-healing systems 
 
 decoupling: easy to scale the programs
